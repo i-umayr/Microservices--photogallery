@@ -3,7 +3,7 @@ const HomePage=()=>{
 
     return(
         <PageContent title={""}>
-            {/* This is the home page */}
+            This is the home page
         </PageContent>
      )
 }

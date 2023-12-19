@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
 
-
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
@@ -40,7 +39,7 @@ router.post("/register", async (req, res) => {
         await axios.post("http://localhost:4010/events", {
            type: "UserCreated",
            data: {
-           id: user._id,
+           userId: user._id,
            username:user.username,
            email:user.email,
            password:user.password
@@ -95,7 +94,7 @@ router.post("/login", async (req, res) => {
       await axios.post("http://localhost:4010/events", {
          type: "UserLoggedIn",
          data: {
-         id: userwithEmail._id,
+         userId: userwithEmail._id,
          username:userwithEmail.email,
          email:userwithEmail.email,
          password:userwithEmail.password

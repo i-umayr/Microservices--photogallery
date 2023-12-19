@@ -28,6 +28,15 @@ const MainNavigation = () => {
                 Home
               </NavLink>
             </li>
+            <li className="nav-item active">
+              <NavLink
+                to="/images"
+                className={({ isActive }) => (isActive ? `${classes.active} nav-link` : `nav-link`)}
+                end
+              >
+                Images
+              </NavLink>
+            </li>
             
             
            
@@ -37,7 +46,7 @@ const MainNavigation = () => {
                 className={({ isActive }) => (isActive ? `${classes.active} nav-link` : `nav-link`)}
                 end
               >
-                <button className="btn btn-secondary m-0" onClick={LogoutHandler}>Logout</button>
+                <button className="btn btn-secondary"  style={{marginLeft: 'auto'}} onClick={LogoutHandler}>Logout</button>
               </NavLink>
             </li>
           </ul>

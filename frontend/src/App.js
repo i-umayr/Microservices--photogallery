@@ -6,6 +6,7 @@ import ErrorPage from './pages/ErrorPage.js';
 import HomePage from './pages/HomePage.js';
 import LoginPage from './pages/LoginPage.js';
 import RegisterPage from './pages/RegisterPage';
+import ImagesPage from './pages/ImagesPage';
 function App() {
   
   const router = createBrowserRouter([
@@ -19,6 +20,7 @@ function App() {
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <HomePage /> },
+        { path:"images", element: <ImagesPage /> },
       ],
     },
     {

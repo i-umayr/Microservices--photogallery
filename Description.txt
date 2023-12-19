@@ -1,1 +1,10 @@
 This repo is meant for a microservices application which will be built on Mern stack. The idea of application revolves around a photo gallery.
+
+
+4000: account
+4001: storage
+4002: gallery
+
+
+todos:
+include usage mntr somehow
