@@ -27,4 +27,4 @@ app.post("/events", async (req, res) => {
 
 const port = process.env.PORT || 4002;
 
-app.listen(port,()=>console.log(`Auth service Server up and running on port ${port}`));
+app.listen(port,()=>console.log(`Gallery service Server up and running on port ${port}`));

@@ -27,4 +27,4 @@ app.post("/events", async (req, res) => {
 
 const port = process.env.PORT || 4000;
 
-app.listen(port,()=>console.log(`Auth service Server up and running on port ${port}`));
+app.listen(port,()=>console.log(`Account service Server up and running on port ${port}`));

@@ -11,17 +11,16 @@ function App() {
   
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/",  
+      element: <HomePage />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/images",
       element: (
-        <RequireAuth loginPath="/login">
-          <RootLayoutPage />
-        </RequireAuth>
+          <ImagesPage />
       ),
       errorElement: <ErrorPage />,
-      children: [
-        { index: true, element: <HomePage /> },
-        { path:"images", element: <ImagesPage /> },
-      ],
     },
     {
       path: "/login",

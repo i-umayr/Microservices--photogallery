@@ -3,57 +3,61 @@ import { NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import { useSignOut } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
+import { useIsAuthenticated } from "react-auth-kit";
 
 const MainNavigation = () => {
   const signOut = useSignOut();
   const navigate = useNavigate();
+  const isAuthenticated = useIsAuthenticated();
 
-  
   const LogoutHandler = () => {
     signOut();
-    navigate("/login");
+    navigate("/");
   };
 
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light rounded-3 p-3 m-5">
-        <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <NavLink
-                to="/"
-                className={({ isActive }) => (isActive ? `${classes.active} nav-link` : `nav-link`)}
-                end
-              >
-                Home
+  <div className="container-fluid">
+    <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <NavLink to="/" className="nav-link" end>
+            Home
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to="/images" className="nav-link" end>
+            Images
+          </NavLink>
+        </li>
+      </ul>
+      <ul className="navbar-nav">
+        {!isAuthenticated() ? (
+          <>
+            <li className="nav-item">
+              <NavLink to="login" className="btn btn-primary" end>
+                Login
               </NavLink>
             </li>
-            <li className="nav-item active">
-              <NavLink
-                to="/images"
-                className={({ isActive }) => (isActive ? `${classes.active} nav-link` : `nav-link`)}
-                end
-              >
-                Images
+            <li className="nav-item">
+              <NavLink to="register" className="btn btn-secondary" end>
+                Register
               </NavLink>
             </li>
-            
-            
-           
-            <li className="nav-item mt-0">
-              <NavLink
-                to=""
-                className={({ isActive }) => (isActive ? `${classes.active} nav-link` : `nav-link`)}
-                end
-              >
-                <button className="btn btn-secondary"  style={{marginLeft: 'auto'}} onClick={LogoutHandler}>Logout</button>
-              </NavLink>
-            </li>
-          </ul>
-          
-          
-        </div>
-      </nav>
+          </>
+        ) : (
+          <li className="nav-item">
+            <button className="btn btn-secondary" onClick={LogoutHandler}>
+              Logout
+            </button>
+          </li>
+        )}
+      </ul>
+    </div>
+  </div>
+</nav>
+
     </>
   );
 };

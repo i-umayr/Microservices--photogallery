@@ -1,12 +1,12 @@
 import PageContent from "../components/PageContent.js";
-const HomePage=()=>{
-
-    return(
-        <PageContent title={""}>
-            This is the home page
-        </PageContent>
-     )
-}
-
+import MainNavigation from "../components/MainNavigation/MainNavigation";
+const HomePage = () => {
+  return (
+    <>
+      <MainNavigation />
+      This is the home page
+    </>
+  );
+};
 
 export default HomePage;
