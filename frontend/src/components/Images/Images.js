@@ -1,9 +1,12 @@
+
+import NewImage from "./NewImage/NewImage";
 const Images=()=>{
 
 return (
-    <>images are here</>
-)
+  <>
+  <NewImage/>  
+  </>
 
-}
+)}
 
 export default Images;

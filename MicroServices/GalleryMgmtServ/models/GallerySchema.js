@@ -9,7 +9,7 @@ const imageSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  imageData: {
+  imageLink: {
     type: String, 
     required: true,
   },
@@ -22,6 +22,10 @@ const gallerySchema = new mongoose.Schema({
     unique: true,
   },
   freeStorage: {
+    type: Number,
+    required: true,
+  },
+  freeBandwidth: {
     type: Number,
     required: true,
   },

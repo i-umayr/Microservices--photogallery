@@ -14,14 +14,14 @@ function Register(props) {
 
     try {
       const apiEndpoint = process.env.REACT_APP_AUTH_BACKEND;
-      console.log(apiEndpoint)
       const response = await axios.post(`${apiEndpoint}/register`, values);
 
       signIn({
         token: response.data.token,
+        userId:response.data.userId,
         expiresIn: 3600,
         tokenType: "Bearer",
-        authState: { email: values.email },
+        authState: { email: values.email,userId:response.data.userId,token: response.data.token },
       });
       localStorage.setItem("authToken", response.data.token);
       navigate("/");
