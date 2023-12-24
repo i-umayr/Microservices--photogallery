@@ -5,7 +5,6 @@ import MainNavigation from "../components/MainNavigation/MainNavigation.js";
 const RootLayout=()=>{
     return (
     <>
-    <MainNavigation/>
     <main>
     <Outlet/>
     </main>
