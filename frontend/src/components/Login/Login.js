@@ -15,12 +15,12 @@ function Login(props) {
     try {
       const apiEndpoint = process.env.REACT_APP_AUTH_BACKEND;
       const response = await axios.post(`${apiEndpoint}/login`, values);
-
       signIn({
         token: response.data.token,
+        userId:response.data.userId,
         expiresIn: 3600,
         tokenType: "Bearer",
-        authState: { email: values.email },
+        authState: { email: values.email,userId:response.data.userId,token: response.data.token},
       });
       localStorage.setItem("authToken", response.data.token);
       navigate("/");

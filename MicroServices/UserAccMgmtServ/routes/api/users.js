@@ -49,7 +49,7 @@ router.post("/register", async (req, res) => {
         catch(error){
           console.log(error)
         }
-        res.json({ message: "Welcome", token: jwtToken });
+        res.json({ message: "Welcome", token: jwtToken,userId:user._id });
       })
       .catch((err) => console.log(err));
 
@@ -105,7 +105,7 @@ router.post("/login", async (req, res) => {
         console.log(error)
       }
 
-    res.json({ message: "Welcome Back", token: jwtToken });
+    res.json({ message: "Welcome Back", token: jwtToken,userId:userwithEmail._id });
   } catch (err) {
     console.error("Error:", err);
     res.status(500).json({ message: "Internal server error" });
