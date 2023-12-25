@@ -1,0 +1,24 @@
+/* HomePage.css */
+
+.grid-container {
+    opacity: 1;
+    transform: 'none';
+}
+
+.flex-container {
+    display: flex;
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    transform: none;
+}
+
+.image {
+    width: 612px;
+    height: 383px;
+    color: transparent;
+}

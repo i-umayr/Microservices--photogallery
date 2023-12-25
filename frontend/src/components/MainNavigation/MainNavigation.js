@@ -35,7 +35,7 @@ const MainNavigation = () => {
       <ul className="navbar-nav">
         {!isAuthenticated() ? (
           <>
-            <li className="nav-item">
+            <li className="nav-item mx-3">
               <NavLink to="login" className="btn btn-primary" end>
                 Login
               </NavLink>
