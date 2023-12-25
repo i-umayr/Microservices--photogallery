@@ -10,12 +10,7 @@ app.use(bodyParser.json());
 app.use(cors())
 
 
-
-
 const users = require("./routes/api/users");
-
-
-
 
 app.use( users);
 app.post("/events", async (req, res) => {
