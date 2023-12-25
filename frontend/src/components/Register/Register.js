@@ -50,7 +50,7 @@ const loginHandler=()=>{
     <div className={`${classes.container}`}>
       <form
         onSubmit={formik.handleSubmit}
-        className={`bg-light ${classes["border"]} ${classes["rounded"]} ${classes["m-5"]} ${classes["bg-light"]} ${classes["p-4"]} ${classes["square-form"]} pb-5 pt-2 px-5`}
+        className={` ${classes["border"]} ${classes["rounded"]} ${classes["m-5"]} ${classes["bg-light"]} ${classes["p-4"]} ${classes["square-form"]} pb-5 pt-2 px-5`}
       >
         <p className="text-danger">{error}</p>
         <h3 className="mb-3">Register</h3>
@@ -105,15 +105,32 @@ const loginHandler=()=>{
           className="btn btn-primary"
           type="submit"
           disabled={formik.isSubmitting}
+          style={{ width: '100%' }}
         >
           {formik.isSubmitting ? "Registering..." : "Register"}
         </button>
-        <button
+        {/* <button
           className="btn btn-secondary"
           type="button"
           disabled={formik.isSubmitting}
           onClick={loginHandler}
-        >Login</button>
+        >Login</button> */}
+      
+      <p style={{ fontSize: '14px', textAlign: 'center', marginTop: '1rem' }}>
+          Already have an account?
+          <a
+            href=""
+            onClick={loginHandler}
+            // disabled={formik.isSubmitting}
+            style={{ color: '#007bff', textDecoration: 'none' }}
+          >
+            &nbsp; Sign In.
+          </a>
+        </p>
+
+        <p class="leading-normal mt-2 flex items-center justify-center">
+         &#x1F512; Credentials are secure and encrypted</p>
+      
       </form>
     </div>
   );
