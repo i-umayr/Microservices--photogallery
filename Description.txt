@@ -4,10 +4,9 @@ This repo is meant for a microservices application which will be built on Mern s
 4000: account
 4001: storage
 4002: gallery
-
+4003: logging
+4004: usagemntr
+4005: view
 
 Event Bus : 5000
 
-
-todos:
-include usage mntr somehow

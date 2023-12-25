@@ -25,8 +25,8 @@ function verifyToken(req, res, next) {
 const uploadToCloudinary = (image) => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(
-      image.filepath, // Path of the uploaded image
-      { folder: 'photogallery' }, // Specify folder if needed
+      image.filepath, 
+      { folder: 'photogallery' }, 
       (error, result) => {
         if (error) {
           reject(error);
@@ -39,7 +39,20 @@ const uploadToCloudinary = (image) => {
 };
 
 router.get("/:userId", verifyToken, async (req, res) => {
-  console.log(req.files);
+  const userId = req.params.userId;
+
+  try {
+    const userGallery = await Gallery.findOne({ userId });
+
+    if (!userGallery) {
+      return res.status(404).json({ error: 'User gallery not found' });
+    }
+
+    res.status(200).json({ gallery: userGallery });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch user gallery' });
+  }
 });
 
 router.post("/add/:userId", async (req, res) => {
@@ -58,7 +71,7 @@ router.post("/add/:userId", async (req, res) => {
     console.log(images)
     try {
       const imageLinks = [];
-      const totalSizeKB = images.reduce((acc, image) => acc + image.size, 0) / 1024; // Total size in KB
+      const totalSizeKB = images.reduce((acc, image) => acc + image.size, 0) / 1024; 
       console.log(totalSizeKB)
       const userGallery = await Gallery.findOne({ userId });
 
@@ -72,12 +85,13 @@ router.post("/add/:userId", async (req, res) => {
       console.log('heree')
       for (const image of images) {
         console.log(image)
-        const uploadedImage = await uploadToCloudinary(image); // Upload image to Cloudinary
+        const uploadedImage = await uploadToCloudinary(image);
         console.log(uploadedImage)
         const newImage = {
           title: image.originalFilename,
           size: image.size/1024,
           imageLink: uploadedImage.secure_url,
+          publicId:uploadedImage.public_id
         };
 
         imageLinks.push(uploadedImage.secure_url);
@@ -95,8 +109,32 @@ router.post("/add/:userId", async (req, res) => {
   });
   });
 
-router.delete("/remove/:imageId", verifyToken, async (req, res) => {});
-
-router.get("/download/:imageId", verifyToken, async (req, res) => {});
+  router.delete("/:userId/:imageId", verifyToken, async (req, res) => {
+    const userId = req.params.userId;
+    const imageId = req.params.imageId;
+    try {
+      const userGallery = await Gallery.findOne({ userId });
+  
+      if (!userGallery) {
+        return res.status(404).json({ error: "User gallery not found" });
+      }
+  
+      const imageToDelete = userGallery.images.id(imageId);
+      if (!imageToDelete) {
+        return res.status(404).json({ error: "Image not found" });
+      }
+  
+      await cloudinary.uploader.destroy(imageToDelete.publicId);
+  
+      const imageDocument = imageToDelete.toObject(); 
+    userGallery.images.pull({ _id: imageDocument._id });
+      await userGallery.save();
+  
+      res.status(200).json({ message: "Image deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      res.status(500).json({ error: "Failed to delete image" });
+    }
+  });
 
 module.exports = router;
