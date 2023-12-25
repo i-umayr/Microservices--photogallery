@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ExistingImages.module.css";
 import axios, { AxiosError } from "axios";
+import { useRef } from "react";
 import { useAuthUser } from "react-auth-kit";
 
 const ExistingImages = ({ images }) => {
@@ -33,10 +34,10 @@ const ExistingImages = ({ images }) => {
     setShowOptions(null);
     openFullScreen(image);
   };
-  
+
   const handleDownload = async (imageLink, imageName) => {
-      setShowOptions(null);
-      try {
+    setShowOptions(null);
+    try {
       const response = await fetch(imageLink);
       const blob = await response.blob();
 
@@ -50,10 +51,9 @@ const ExistingImages = ({ images }) => {
     } catch (error) {
       console.error("Download failed:", error.message);
     }
+  };
 
-};
-
-const handleDelete = async (image) => {
+  const handleDelete = async (image) => {
     setShowOptions(null);
     try {
       const userId = auth().userId;
@@ -68,7 +68,7 @@ const handleDelete = async (image) => {
         `http://localhost:4002/images/${userId}/${image._id}`,
         config
       );
-      console.log(response)
+      console.log(response);
     } catch (error) {
       console.error("Error Deleting image:", error);
     }
@@ -121,12 +121,6 @@ const handleDelete = async (image) => {
                   onClick={() => handleDelete(showOptions)}
                 >
                   Delete
-                </div>
-                <div
-                  className={styles.option}
-                  onClick={() => console.log("Rename")}
-                >
-                  Rename
                 </div>
               </div>
             )}

@@ -1,15 +1,13 @@
-const express = require("express")
-const app=express()
-const cors=require("cors")
-const bodyParser = require('body-parser');
-const {Storage} =require("./models/StorageSchema");
-const mongoose=require("./config/db");
-const axios=require("axios");
-require('dotenv').config();
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const { Storage } = require("./models/StorageSchema");
+const mongoose = require("./config/db");
+const axios = require("axios");
+require("dotenv").config();
 app.use(bodyParser.json());
-app.use(cors())
-
-
+app.use(cors());
 
 app.post("/events", async (req, res) => {
   console.log("Event Received:", req.body.type);
@@ -18,23 +16,20 @@ app.post("/events", async (req, res) => {
   if (type === "UserCreated") {
     try {
       const { userId } = data;
+      const storage = await Storage.findOne({ userId });
+      if (!storage) {
+        const initialStorage = new Storage({
+          userId,
+          totalStorage: 10000,
+          UsedStorage: 0,
+          FreeStorage: 10000,
+        });
 
-      const initialStorage = new Storage({
-        userId,
-        totalStorage: 10000, 
-        UsedStorage: 0,
-        FreeStorage: 10000
-      });
-
-      await initialStorage.save();
-
-      await axios.post('http://localhost:4010/events', {
-        type: 'StorageUpdated',
-        data: { userId, storageDetails: initialStorage }
-      });
-
+        await initialStorage.save();
+        console.log("storage Added")
+      }
     } catch (error) {
-      console.error('Error handling UserCreated event:', error.message);
+      console.error("Error handling UserCreated event:", error.message);
     }
   }
 
@@ -58,20 +53,23 @@ app.post("/events", async (req, res) => {
 
       await userStorage.save();
 
-      await axios.post('http://localhost:4010/events', {
-        type: 'StorageUpdated',
-        data: { userId, storageDetails: userStorage }
+      await axios.post("http://localhost:4010/events", {
+        type: "StorageUpdated",
+        data: { userId, storageDetails: userStorage },
       });
-
     } catch (error) {
-      console.error('Error handling PhotoAdded/PhotoRemoved event:', error.message);
+      console.error(
+        "Error handling PhotoAdded/PhotoRemoved event:",
+        error.message
+      );
     }
   }
 
   res.send({});
 });
 
-
 const port = process.env.PORT || 4003;
 
-app.listen(port,()=>console.log(`Storage service Server up and running on port ${port}`));
+app.listen(port, () =>
+  console.log(`Storage service Server up and running on port ${port}`)
+);

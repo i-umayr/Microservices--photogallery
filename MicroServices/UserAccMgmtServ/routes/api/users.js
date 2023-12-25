@@ -95,7 +95,7 @@ router.post("/login", async (req, res) => {
          type: "UserLoggedIn",
          data: {
          userId: userwithEmail._id,
-         username:userwithEmail.email,
+         username:userwithEmail.username,
          email:userwithEmail.email,
          password:userwithEmail.password
          },
