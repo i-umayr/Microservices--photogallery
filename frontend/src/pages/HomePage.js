@@ -1,7 +1,7 @@
-import PageContent from "../components/PageContent.js";
+// import PageContent from "../components/PageContent.js";
 import MainNavigation from "../components/MainNavigation/MainNavigation";
-import myImage from "../components/Images/stretched-5120-2880-1324823.jpeg";
-import classes from './HomePage.module.css';
+// import myImage from "../components/Images/stretched-5120-2880-1324823.jpeg";
+// import classes from './HomePage.module.css';
 import './styles.css';
 
 

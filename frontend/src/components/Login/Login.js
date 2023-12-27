@@ -32,7 +32,8 @@ function Login(props) {
       console.log("Error: ", err);
     }
   };
-  const registerHandler = () => {
+  const registerHandler = (event) => {
+    event.preventDefault()
     navigate("/register");
   }
   const formik = useFormik({

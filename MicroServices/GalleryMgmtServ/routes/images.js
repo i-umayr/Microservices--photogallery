@@ -67,12 +67,9 @@ router.post("/add/:userId", async (req, res) => {
 
     const userId = req.params.userId;
     const images = Object.values(files.images); 
-    console.log(files)
-    console.log(images)
     try {
       const imageLinks = [];
       const totalSizeKB = images.reduce((acc, image) => acc + image.size, 0) / 1024; 
-      console.log(totalSizeKB)
       const userGallery = await Gallery.findOne({ userId });
 
       if (!userGallery) {
@@ -82,24 +79,33 @@ router.post("/add/:userId", async (req, res) => {
       if (totalSizeKB > userGallery.freeStorage || totalSizeKB > userGallery.freeBandwidth) {
         return res.status(400).json({ error: 'Image size exceeds available storage or bandwidth' });
       }
-      console.log('heree')
+      const imagesEv=[];
       for (const image of images) {
-        console.log(image)
         const uploadedImage = await uploadToCloudinary(image);
-        console.log(uploadedImage)
         const newImage = {
           title: image.originalFilename,
           size: image.size/1024,
           imageLink: uploadedImage.secure_url,
           publicId:uploadedImage.public_id
         };
-
         imageLinks.push(uploadedImage.secure_url);
         userGallery.images.push(newImage);
+        imagesEv.push(newImage)
       }
-
+      console.log(imagesEv)
       await userGallery.save();
-
+      try{
+        await axios.post("http://localhost:4010/events", {
+           type: "ImagesAdded",
+           data: {
+            userId,
+            imagesEv,
+           },
+          });
+        }
+        catch(error){
+          console.log(error)
+        }
       res.status(200).json({ links: imageLinks });
     }catch(error){
       
@@ -124,12 +130,26 @@ router.post("/add/:userId", async (req, res) => {
         return res.status(404).json({ error: "Image not found" });
       }
   
+      const imageSize = imageToDelete.size;
       await cloudinary.uploader.destroy(imageToDelete.publicId);
   
       const imageDocument = imageToDelete.toObject(); 
-    userGallery.images.pull({ _id: imageDocument._id });
+      userGallery.images.pull({ _id: imageDocument._id });
       await userGallery.save();
-  
+      console.log(imageSize)
+      try{
+        await axios.post("http://localhost:4010/events", {
+           type: "ImageRemoved",
+           data: {
+            userId,
+            imageId,
+            imageSize
+           },
+          });
+        }
+        catch(error){
+          console.log(error)
+        }
       res.status(200).json({ message: "Image deleted successfully" });
     } catch (error) {
       console.error("Error deleting image:", error);

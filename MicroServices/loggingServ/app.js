@@ -43,6 +43,37 @@ app.post("/events", async (req, res) => {
       console.error("Error creating log for user login:", error);
     }
   }
+  if (type === "ImagesAdded") {
+    try {
+      const { userId, imagesEv } = data;
+      const log = await Log.findOne({ userId });
+     
+      if (log) {
+        const logMessage = `Images added by user ${userId}: ${imagesEv.map(image => image.title).join(", ")}`;
+        log.logs.push({ message: logMessage });
+        await log.save();
+      }
+    } catch (error) {
+      console.error("Error creating log for image removed:", error);
+    }
+      
+          
+  }
+  if (type === "ImageRemoved") {
+    try {
+      const { userId,imageId } = data; 
+      const log = await Log.findOne({ userId });
+
+      if (log) {
+        log.logs.push({
+          message: `Image with the id ${imageId} removed from DB`,
+        });
+        await log.save();
+      }
+    } catch (error) {
+      console.error("Error creating log for image removed:", error);
+    }
+  }
 
   res.send({});
 });
