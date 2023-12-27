@@ -26,42 +26,84 @@ app.post("/events", async (req, res) => {
         });
 
         await initialStorage.save();
-        console.log("storage Added")
+        console.log("storage Added");
       }
     } catch (error) {
       console.error("Error handling UserCreated event:", error.message);
     }
   }
 
-  if (type === "PhotoAdded" || type === "PhotoRemoved") {
+  if (type === "ImageRemoved") {
     try {
-      const { userId, photoSize } = data;
+      const { userId, imageId, imageSize } = data;
+      const storage = await Storage.findOne({ userId });
 
-      const userStorage = await Storage.findOne({ userId });
-
-      if (!userStorage) {
-        return res.status(404).json({ error: "User not found" });
+      if (!storage) {
+        console.error("Storage not found for User:", userId);
+        return res.status(404).send("Storage not found");
       }
 
-      if (type === "PhotoAdded") {
-        userStorage.UsedStorage += photoSize;
-        userStorage.FreeStorage -= photoSize;
-      } else if (type === "PhotoRemoved") {
-        userStorage.UsedStorage -= photoSize;
-        userStorage.FreeStorage += photoSize;
+      storage.UsedStorage -= imageSize;
+      storage.FreeStorage += imageSize;
+
+      await storage.save();
+      try{
+        await axios.post("http://localhost:4010/events", {
+          type: "StorageUpdated",
+          data: {
+            userId,
+            storageDetails: {
+              UsedStorage: storage.UsedStorage,
+              FreeStorage: storage.FreeStorage,
+              TotalStorage: storage.totalStorage,
+            },
+          },
+        });
+      }catch(error){
+        console.log(error)
       }
-
-      await userStorage.save();
-
-      await axios.post("http://localhost:4010/events", {
-        type: "StorageUpdated",
-        data: { userId, storageDetails: userStorage },
-      });
+      console.log("Storage updated for ImageRemoved event:", userId);
     } catch (error) {
-      console.error(
-        "Error handling PhotoAdded/PhotoRemoved event:",
-        error.message
+      console.error("Error handling ImageRemoved event:", error.message);
+    }
+  }
+
+  if (type === "ImagesAdded") {
+    try {
+      const { userId, imagesEv } = data;
+      const storage = await Storage.findOne({ userId });
+
+      if (!storage) {
+        console.error("Storage not found for User:", userId);
+        return res.status(404).send("Storage not found");
+      }
+      const totalAddedSize = imagesEv.reduce(
+        (total, image) => total + image.size,
+        0
       );
+      console.log(totalAddedSize)
+      storage.UsedStorage += totalAddedSize;
+      storage.FreeStorage -= totalAddedSize;
+
+      await storage.save();
+      try{
+        await axios.post("http://localhost:4010/events", {
+          type: "StorageUpdated",
+          data: {
+            userId,
+            storageDetails: {
+              UsedStorage: storage.UsedStorage,
+              FreeStorage: storage.FreeStorage,
+              TotalStorage: storage.totalStorage,
+            },
+          },
+        });
+      }catch(error){
+        console.log(error)
+      }
+      console.log("Storage updated for ImagesAdded event:", userId);
+    } catch (error) {
+      console.error("Error handling ImagesAdded event:", error.message);
     }
   }
 

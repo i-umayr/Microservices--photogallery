@@ -37,6 +37,26 @@ app.post("/events", async (req, res) => {
       console.error("Error creating gallery:", error);
       return res.status(500).send("Internal Server Error");
     }
+  }if (type === "StorageUpdated") {
+    try {
+      const { userId, storageDetails } = data;
+      const existingGallery = await Gallery.findOne({ userId });
+
+      if (!existingGallery) {
+        console.log(`Gallery not found for user ${userId}`);
+        return res.status(404).send("Gallery not found");
+      }
+
+      existingGallery.freeStorage = storageDetails.FreeStorage;
+
+      await existingGallery.save();
+      console.log(`Free storage updated for user ${userId}`);
+
+    } catch (error) {
+      console.error("Error updating free storage:", error.message);
+      return res.status(500).send("Internal Server Error");
+    }
+
   }
   res.send({});
 });

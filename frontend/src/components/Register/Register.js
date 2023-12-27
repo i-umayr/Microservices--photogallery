@@ -33,8 +33,8 @@ function Register(props) {
       console.log("Error: ", err);
     }
   };
-const loginHandler=()=>{
-
+const loginHandler=(event)=>{
+  event.preventDefault()
     navigate("/login");
 }
   const formik = useFormik({
