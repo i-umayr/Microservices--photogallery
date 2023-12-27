@@ -29,10 +29,19 @@ const Images = () => {
 
     fetchImages();
   }, []);
+
+  const imageAddedHandler = (data) => {
+    console.log(data)
+    setImages(data.gallery.images);
+  };
+  const imageDeletedHandler=(data)=>{
+    console.log(data)
+    setImages(data.gallery.images);
+  }
   return (
     <>
-      <NewImage />
-      <ExistingImages images={images} />
+      <NewImage onImageAdded={imageAddedHandler}/>
+      <ExistingImages images={images} onImageDeleted={imageDeletedHandler}/>
     </>
   );
 };

@@ -6,11 +6,15 @@ const storageSchema = new mongoose.Schema({
     required: true,
     unique:true
   },
-  totalUsage: {
+  bandwidthTotalUsage: {
     type: Number,
     required: true,
   },
-  dailyUsage: {
+  bandwidthDailyUsage: {
+    type: Number,
+    required: true,
+  },
+  dailyLimit: {
     type: Number,
     required: true,
   }

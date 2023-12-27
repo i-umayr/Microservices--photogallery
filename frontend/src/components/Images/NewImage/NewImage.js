@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import {useAuthUser} from 'react-auth-kit'
 import { useEffect } from 'react';
 import axios, { AxiosError } from "axios";
-const NewImage = () => {
+const NewImage = ({onImageAdded}) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const auth = useAuthUser()
+  const fileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -36,9 +37,11 @@ const NewImage = () => {
           'Content-Type': 'multipart/form-data',
         },
       };
-  
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
       const response = await axios.post(url, formData, config);
-      console.log(response.data);
+      onImageAdded(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -47,6 +50,7 @@ const NewImage = () => {
     <>
       <form encType="multipart/form-data" onSubmit={imageUploadHandler}>
         <input
+          ref={fileInputRef}
           id="file"
           name="file"
           type="file"

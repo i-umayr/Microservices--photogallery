@@ -7,7 +7,6 @@ const multer = require("multer");
 const upload = multer({ storage: storage });
 const { Gallery } = require("../models/GallerySchema");
 const formidable = require('formidable');
-const fs = require('fs');
 function verifyToken(req, res, next) {
   const token = req.header("Authorization");
   if (!token)
@@ -92,7 +91,6 @@ router.post("/add/:userId", async (req, res) => {
         userGallery.images.push(newImage);
         imagesEv.push(newImage)
       }
-      console.log(imagesEv)
       await userGallery.save();
       try{
         await axios.post("http://localhost:4010/events", {
@@ -106,7 +104,7 @@ router.post("/add/:userId", async (req, res) => {
         catch(error){
           console.log(error)
         }
-      res.status(200).json({ links: imageLinks });
+      res.status(200).json({ links: imageLinks, gallery: userGallery });
     }catch(error){
       
       console.error(error);
@@ -150,7 +148,7 @@ router.post("/add/:userId", async (req, res) => {
         catch(error){
           console.log(error)
         }
-      res.status(200).json({ message: "Image deleted successfully" });
+        res.status(200).json({ message: "Image deleted successfully", gallery: userGallery });
     } catch (error) {
       console.error("Error deleting image:", error);
       res.status(500).json({ error: "Failed to delete image" });
