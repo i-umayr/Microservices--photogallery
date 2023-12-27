@@ -7,6 +7,13 @@ const NewImage = ({onImageAdded}) => {
   const auth = useAuthUser()
   const fileInputRef = useRef(null);
 
+  useEffect(() => {
+    if (selectedFiles.length > 0) {
+      // Trigger form submission
+      imageUploadHandler({ preventDefault: () => {} });
+    }
+  }, [selectedFiles]);
+
   const handleFileChange = (event) => {
     const files = event.target.files;
     setSelectedFiles(files);
@@ -20,7 +27,6 @@ const NewImage = ({onImageAdded}) => {
       formData.append('images', selectedFiles[i]); // This might cause issues
     }
  
-    
     try {
       const token = auth().token;
       const userId = auth().userId;
@@ -28,8 +34,6 @@ const NewImage = ({onImageAdded}) => {
         console.log(pair[0], pair[1]);
       }
       const url = `http://localhost:4002/images/add/${userId}`;
-      
-      
       
       const config = {
         headers: {
@@ -57,9 +61,9 @@ const NewImage = ({onImageAdded}) => {
           multiple
           onChange={handleFileChange}
         />
-        <button className="btn btn-success" type="submit">
+        {/* <button className="btn btn-success" type="submit">
           Submit
-        </button>
+        </button> */}
       </form>
     </>
   );
