@@ -17,7 +17,7 @@ const MainNavigation = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light rounded-3 p-3 m-5">
+      <nav className= {` ${classes.blurredNavbar} navbar navbar-expand-lg navbar-light p-1`}>
   <div className="container-fluid">
     <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
       <ul className="navbar-nav">
