@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react';
-import {useAuthUser} from 'react-auth-kit'
+import { useAuthUser } from 'react-auth-kit'
 import { useEffect } from 'react';
+import styles from './NewImage.module.css';
+
 import axios, { AxiosError } from "axios";
-const NewImage = ({onImageAdded}) => {
+const NewImage = ({ onImageAdded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const auth = useAuthUser()
   const fileInputRef = useRef(null);
@@ -10,7 +12,7 @@ const NewImage = ({onImageAdded}) => {
   useEffect(() => {
     if (selectedFiles.length > 0) {
       // Trigger form submission
-      imageUploadHandler({ preventDefault: () => {} });
+      imageUploadHandler({ preventDefault: () => { } });
     }
   }, [selectedFiles]);
 
@@ -21,12 +23,12 @@ const NewImage = ({onImageAdded}) => {
 
   const imageUploadHandler = async (event) => {
     event.preventDefault();
-    
+
     const formData = new FormData();
     for (let i = 0; i < selectedFiles.length; i++) {
       formData.append('images', selectedFiles[i]); // This might cause issues
     }
- 
+
     try {
       const token = auth().token;
       const userId = auth().userId;
@@ -34,7 +36,7 @@ const NewImage = ({onImageAdded}) => {
         console.log(pair[0], pair[1]);
       }
       const url = `http://localhost:4002/images/add/${userId}`;
-      
+
       const config = {
         headers: {
           Authorization: `${token}`,
@@ -53,14 +55,19 @@ const NewImage = ({onImageAdded}) => {
   return (
     <>
       <form encType="multipart/form-data" onSubmit={imageUploadHandler}>
-        <input
-          ref={fileInputRef}
-          id="file"
-          name="file"
-          type="file"
-          multiple
-          onChange={handleFileChange}
-        />
+      <input
+        ref={fileInputRef}
+        id="file"
+        name="file"
+        type="file"
+        multiple
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+      <label htmlFor="file" className={styles.fileLabel}>
+        <span className={styles.plusIcon}>+</span>
+        <span>Choose files</span>
+      </label>
         {/* <button className="btn btn-success" type="submit">
           Submit
         </button> */}
