@@ -4,7 +4,7 @@ import axios, { AxiosError } from "axios";
 import { useRef } from "react";
 import { useAuthUser } from "react-auth-kit";
 
-const ExistingImages = ({ images }) => {
+const ExistingImages = ({ images,onImageDeleted }) => {
   const [fullScreenImage, setFullScreenImage] = useState(null);
   const [optionsPosition, setOptionsPosition] = useState({ top: 0, left: 0 });
   const [showOptions, setShowOptions] = useState(null);
@@ -68,7 +68,7 @@ const ExistingImages = ({ images }) => {
         `http://localhost:4002/images/${userId}/${image._id}`,
         config
       );
-      console.log(response);
+      onImageDeleted(response.data)
     } catch (error) {
       console.error("Error Deleting image:", error);
     }

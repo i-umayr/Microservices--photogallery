@@ -58,6 +58,26 @@ app.post("/events", async (req, res) => {
     }
 
   }
+  if (type === "UsageUpdated"){
+    try {
+      const { userId, usageDetails } = data;
+      const existingGallery = await Gallery.findOne({ userId });
+
+      if (!existingGallery) {
+        console.log(`Gallery not found for user ${userId}`);
+        return res.status(404).send("Gallery not found");
+      }
+
+      existingGallery.freeBandwidth = 25000 - usageDetails.bandwidthDailyUsage; 
+
+      await existingGallery.save();
+      console.log(`Free bandwidth updated for user ${userId}`);
+
+    } catch (error) {
+      console.error("Error updating free bandwidth based on usage:", error.message);
+      return res.status(500).send("Internal Server Error");
+    }
+  }
   res.send({});
 });
 
