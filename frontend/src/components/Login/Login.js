@@ -93,7 +93,6 @@ function Login(props) {
               "\n        .cascading-right {\n          margin-right: -50px;\n        }\n\n        @media (max-width: 991.98px) {\n          .cascading-right {\n            margin-right: 0;\n          }\n        }\n      ",
           }}
         />
-        {/* Jumbotron */}
         <div className="container">
           <div className="row g-0 align-items-center">
             <div className="col-lg-6 mb-5 mb-lg-0">
