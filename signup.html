@@ -19,6 +19,30 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
       rel="stylesheet"
     />
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+      }
+
+      .container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cascading-right {
+        margin-right: -50px;
+      }
+
+      @media (max-width: 991.98px) {
+        .cascading-right {
+          margin-right: 0;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Section: Design Block -->
@@ -36,7 +60,7 @@
       </style>
 
       <!-- Jumbotron -->
-      <div class="container py-4">
+      <div class="container">
         <div class="row g-0 align-items-center">
           <div class="col-lg-6 mb-5 mb-lg-0">
             <div
@@ -59,19 +83,7 @@
                           class="form-control"
                         />
                         <label class="form-label" for="form3Example1"
-                          >First name</label
-                        >
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                      <div class="form-outline">
-                        <input
-                          type="text"
-                          id="form3Example2"
-                          class="form-control"
-                        />
-                        <label class="form-label" for="form3Example2"
-                          >Last name</label
+                          >User name</label
                         >
                       </div>
                     </div>
@@ -103,15 +115,8 @@
 
                   <!-- Checkbox -->
                   <div class="form-check d-flex justify-content-center mb-4">
-                    <input
-                      class="form-check-input me-2"
-                      type="checkbox"
-                      value=""
-                      id="form2Example33"
-                      checked
-                    />
                     <label class="form-check-label" for="form2Example33">
-                      Subscribe to our newsletter
+                      🔒 Credentials are secure and encrypted
                     </label>
                   </div>
 
@@ -122,34 +127,7 @@
 
                   <!-- Register buttons -->
                   <div class="text-center">
-                    <p>or sign up with:</p>
-                    <button
-                      type="button"
-                      class="btn btn-link btn-floating mx-1"
-                    >
-                      <i class="fab fa-facebook-f"></i>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="btn btn-link btn-floating mx-1"
-                    >
-                      <i class="fab fa-google"></i>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="btn btn-link btn-floating mx-1"
-                    >
-                      <i class="fab fa-twitter"></i>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="btn btn-link btn-floating mx-1"
-                    >
-                      <i class="fab fa-github"></i>
-                    </button>
+                    <p>Already have an account? <span>Click</span></p>
                   </div>
                 </form>
               </div>
