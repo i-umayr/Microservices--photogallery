@@ -14,6 +14,13 @@
   display: flex;
   flex-direction: column;
   height: 250px;
+
+  background: rgba( 255, 255, 255, 0.1 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 0px );
+-webkit-backdrop-filter: blur( 0px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .cardBody {
@@ -37,10 +44,17 @@
   background-color: #f0f0f0;
 }
 .cardHeader{
-    display: flex;
+    /* display: flex; */
   justify-content: center;
   align-items: center;
+  display: none;
 }
+
+.imageCard:hover > .cardHeader {
+  display: flex;
+  transition: ease-in-out;
+}
+
 .cardFooter {
     display: flex;
     justify-content: space-between;
@@ -65,7 +79,7 @@
 }
 
 .cardBody img:hover {
-  transform: scale(1.5);
+  transform: scale(1.1);
   cursor: pointer;
 }
 
