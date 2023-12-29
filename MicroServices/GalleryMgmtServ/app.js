@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("./config/db");
 const bodyParser = require("body-parser");
 const { Gallery } = require("./models/GallerySchema");
+const cron = require("node-cron");
 
 require("dotenv").config();
 app.use(bodyParser.json());
@@ -23,9 +24,9 @@ app.post("/events", async (req, res) => {
       if (!existingGallery) {
         const newGallery = new Gallery({
           userId: userId,
-          freeStorage: 10000, 
+          freeStorage: 10000,
           freeBandwidth: 25000,
-          images: [], 
+          images: [],
         });
         await newGallery.save();
 
@@ -37,7 +38,8 @@ app.post("/events", async (req, res) => {
       console.error("Error creating gallery:", error);
       return res.status(500).send("Internal Server Error");
     }
-  }if (type === "StorageUpdated") {
+  }
+  if (type === "StorageUpdated") {
     try {
       const { userId, storageDetails } = data;
       const existingGallery = await Gallery.findOne({ userId });
@@ -51,14 +53,12 @@ app.post("/events", async (req, res) => {
 
       await existingGallery.save();
       console.log(`Free storage updated for user ${userId}`);
-
     } catch (error) {
       console.error("Error updating free storage:", error.message);
       return res.status(500).send("Internal Server Error");
     }
-
   }
-  if (type === "UsageUpdated"){
+  if (type === "UsageUpdated") {
     try {
       const { userId, usageDetails } = data;
       const existingGallery = await Gallery.findOne({ userId });
@@ -68,18 +68,42 @@ app.post("/events", async (req, res) => {
         return res.status(404).send("Gallery not found");
       }
 
-      existingGallery.freeBandwidth = 25000 - usageDetails.bandwidthDailyUsage; 
+      existingGallery.freeBandwidth = 25000 - usageDetails.bandwidthDailyUsage;
 
       await existingGallery.save();
       console.log(`Free bandwidth updated for user ${userId}`);
-
     } catch (error) {
-      console.error("Error updating free bandwidth based on usage:", error.message);
+      console.error(
+        "Error updating free bandwidth based on usage:",
+        error.message
+      );
       return res.status(500).send("Internal Server Error");
     }
   }
   res.send({});
 });
+
+// Schedule a cron job to run every day at 12 AM and reset bandwidth
+cron.schedule("0 0 * * *", async () => {
+  try {
+    // Reset bandwidth for all users to 25MB
+    const users = await Gallery.find({});
+
+    for (const user of users) {
+      user.freeBandwidth = 25000;
+      await user.save();
+      console.log(`Bandwidth reset for user ${user.userId}`);
+    }
+
+    console.log("Bandwidth reset for all users");
+  } catch (error) {
+    console.error("Error resetting bandwidth:", error.message);
+  }
+}
+, {
+  timezone: "Asia/Karachi", // Set the desired time zone here
+}
+);
 
 const port = process.env.PORT || 4002;
 
