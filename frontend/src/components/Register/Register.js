@@ -59,12 +59,11 @@ function Register(props) {
   });
 
   const handleInputFocus = (field) => {
-    // Set focus state when input field is focused
     setFocusState((prevFocusState) => ({ ...prevFocusState, [field]: true }));
   };
 
   const handleInputBlur = (field) => {
-    // Set focus state when input field is blurred
+
     setFocusState((prevFocusState) => ({ ...prevFocusState, [field]: false }));
   };
 
