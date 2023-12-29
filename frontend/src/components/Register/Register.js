@@ -63,7 +63,6 @@ function Register(props) {
   };
 
   const handleInputBlur = (field) => {
-
     setFocusState((prevFocusState) => ({ ...prevFocusState, [field]: false }));
   };
 
@@ -88,9 +87,44 @@ function Register(props) {
         rel="stylesheet"
       />
       <style
+        //   dangerouslySetInnerHTML={{
+        //     __html:
+        //       "\n      body,\n      html {\n        height: 100%;\n        margin: 0;\n      }\n\n      .container {\n        min-height: 100vh;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n      }\n\n      .cascading-right {\n        margin-right: -50px;\n      }\n\n      @media (max-width: 991.98px) {\n        .cascading-right {\n          margin-right: 0;\n        }\n      }\n    ",
+        //   }
+        // }
         dangerouslySetInnerHTML={{
-          __html:
-            "\n      body,\n      html {\n        height: 100%;\n        margin: 0;\n      }\n\n      .container {\n        min-height: 100vh;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n      }\n\n      .cascading-right {\n        margin-right: -50px;\n      }\n\n      @media (max-width: 991.98px) {\n        .cascading-right {\n          margin-right: 0;\n        }\n      }\n    ",
+          __html: `
+          body, html {
+            height: 100%;
+            margin: 0;
+          }
+    
+          .container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+    
+          .cascading-right {
+            margin-right: -50px;
+          }
+    
+          @media (max-width: 991.98px) {
+            .cascading-right {
+              margin-right: 0;
+            }
+          }
+
+          .form-outline input:focus {
+            border-bottom: 2px solid #007bff;
+            box-shadow: none;
+          }
+    
+          .form-outline input:not(:focus) {
+            border-bottom: 1px solid #ced4da;
+          }
+        `,
         }}
       />
       {/* Section: Design Block */}
@@ -186,6 +220,10 @@ function Register(props) {
                         </label>
                       )}
 
+                      <div>
+                        {formik.touched.username && formik.errors.username}
+                      </div>
+
                       {/* <label className="form-label" htmlFor="form3Example4">
                         Password
                       </label> */}
@@ -195,7 +233,7 @@ function Register(props) {
                         className="form-check-label"
                         htmlFor="form2Example33"
                       >
-                        🔒 Credentials are secure and encrypted
+                        Create your account now!
                       </label>
                     </div>
                     {/* Submit button */}

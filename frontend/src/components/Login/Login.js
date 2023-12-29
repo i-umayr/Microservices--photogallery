@@ -88,13 +88,54 @@ function Login(props) {
       {/* Section: Design Block */}
       <section className="text-center text-lg-start">
         <style
+          // dangerouslySetInnerHTML={{
+          //   __html:
+          //     "\n        .cascading-right {\n          margin-left: -50px;\n        }\n\n        @media (max-width: 991.98px) {\n          .cascading-right {\n            margin-left: 0;\n          }\n        }\n      ",
+          // }}
           dangerouslySetInnerHTML={{
-            __html:
-              "\n        .cascading-right {\n          margin-right: -50px;\n        }\n\n        @media (max-width: 991.98px) {\n          .cascading-right {\n            margin-right: 0;\n          }\n        }\n      ",
+            __html: `
+              body, html {
+                height: 100%;
+                margin: 0;
+              }
+        
+              .container {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+        
+              .cascading-right {
+                margin-left: -50px;
+              }
+        
+              @media (max-width: 991.98px) {
+                .cascading-right {
+                  margin-left: 0;
+                }
+              }
+    
+              .form-outline input:focus {
+                border-bottom: 2px solid #007bff;
+                box-shadow: none;
+              }
+        
+              .form-outline input:not(:focus) {
+                border-bottom: 1px solid #ced4da;
+              }
+            `,
           }}
         />
         <div className="container">
-          <div className="row g-0 align-items-center">
+          <div className="row g-0 align-items-center" >
+          <div className="col-lg-6 mb-5 mb-lg-0">
+              <img
+                src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
+                className="w-100 rounded-4 shadow-4"
+                alt=""
+              />
+            </div>
             <div className="col-lg-6 mb-5 mb-lg-0">
               <div
                 className="card cascading-right"
@@ -103,7 +144,7 @@ function Login(props) {
                   backdropFilter: "blur(30px)",
                 }}
               >
-                <div className="card-body p-5 shadow-5 text-center">
+                <div className="card-body p-5 shadow-5 text-center" >
                   <h2 className="fw-bold mb-5">Login now</h2>
                   <form onSubmit={formik.handleSubmit}>
                     <div className="row">
@@ -119,7 +160,6 @@ function Login(props) {
                             id="form3Example1"
                             className="form-control"
                           />
-
                           {(!formik.values.email || focusState.email) && (
                             <label
                               className="form-label"
@@ -167,7 +207,7 @@ function Login(props) {
                     >
                       {formik.isSubmitting ? "Logging in..." : "Login"}
                     </button>
-                    {/* Register buttons */}
+                    
                     <div className="text-center">
                       <p>
                         Don't have an account?{" "}
@@ -187,13 +227,7 @@ function Login(props) {
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 mb-5 mb-lg-0">
-              <img
-                src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
-                className="w-100 rounded-4 shadow-4"
-                alt=""
-              />
-            </div>
+            
           </div>
         </div>
       </section>
