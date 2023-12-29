@@ -7,17 +7,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: gray;
+    color: white;
     font-weight: 900;
     font-size: 2rem;
-    background-color: #e0e0e0;
+    background: rgba( 255, 255, 255, 0.1 );
+    box-shadow: inset 5px 5px 0px rgba( 255, 255, 255, 0.1 ), inset -5px -5px 0px rgba(255, 255, 255, 0.479);
     height: 15rem;
     width: 15rem;
     border-radius: 40px;
-    box-shadow: inset 5px 5px 0px #a8a8a8, inset -5px -5px 0px #ffffff;
-    margin: 2rem auto;
+    margin: 0 auto;
 }
 
 .plusIcon {
+    color: white;
     font-size: 4rem;
+}
+
+.fileLabel:hover {
+    box-shadow: inset -5px -5px 0px rgba( 255, 255, 255, 0.1 ), inset 5px 5px 0px rgba(251, 248, 215, 0.486);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.fileLabel:hover > .plusIcon {
+    transform: scale(1.2);
+    transition: 0.2s ease-in-out;
 }
