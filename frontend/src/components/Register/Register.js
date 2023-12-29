@@ -3,10 +3,7 @@ import { useFormik } from "formik";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import * as mdb from "mdb-ui-kit"; // lib
-window.mdb = mdb;
+
 
 function Register(props) {
   const [focusState, setFocusState] = useState({
