@@ -5,12 +5,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
-// import '~mdb-ui-kit/css/mdb.min.css'
-// import classes from "./Register.module.css";
 import * as mdb from "mdb-ui-kit"; // lib
 window.mdb = mdb;
 
 function Register(props) {
+  const [focusState, setFocusState] = useState({
+    username: false,
+    email: false,
+    password: false,
+  });
   const [error, setError] = useState("");
   const signIn = useSignIn();
   const navigate = useNavigate();
@@ -54,6 +57,16 @@ function Register(props) {
     },
     onSubmit,
   });
+
+  const handleInputFocus = (field) => {
+    // Set focus state when input field is focused
+    setFocusState((prevFocusState) => ({ ...prevFocusState, [field]: true }));
+  };
+
+  const handleInputBlur = (field) => {
+    // Set focus state when input field is blurred
+    setFocusState((prevFocusState) => ({ ...prevFocusState, [field]: false }));
+  };
 
   return (
     <div>
@@ -102,42 +115,81 @@ function Register(props) {
               >
                 <div className="card-body p-5 shadow-5 text-center">
                   <h2 className="fw-bold mb-5">Sign up now</h2>
-                  <form>
+                  <form onSubmit={formik.handleSubmit}>
                     <div className="row">
                       <div className="col-md-6 mb-4">
                         <div className="form-outline">
                           <input
-                            type="text"
+                            name="username"
+                            value={formik.values.username}
+                            onChange={formik.handleChange}
+                            onBlur={() => handleInputBlur("username")}
+                            onFocus={() => handleInputFocus("username")}
+                            type="username"
                             id="form3Example1"
                             className="form-control"
                           />
-                          <label className="form-label" htmlFor="form3Example1">
+
+                          {(!formik.values.username || focusState.username) && (
+                            <label
+                              className="form-label"
+                              htmlFor="form3Example1"
+                            >
+                              User name
+                            </label>
+                          )}
+
+                          {/* <label className="form-label" htmlFor="form3Example1">
                             User name
-                          </label>
+                          </label> */}
                         </div>
                       </div>
                     </div>
                     {/* Email input */}
                     <div className="form-outline mb-4">
                       <input
+                        name="email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={() => handleInputBlur("email")}
+                        onFocus={() => handleInputFocus("email")}
                         type="email"
                         id="form3Example3"
                         className="form-control"
                       />
-                      <label className="form-label" htmlFor="form3Example3">
+
+                      {(!formik.values.email || focusState.email) && (
+                        <label className="form-label" htmlFor="form3Example3">
+                          Email address
+                        </label>
+                      )}
+
+                      {/* <label className="form-label" htmlFor="form3Example3">
                         Email address
-                      </label>
+                      </label> */}
                     </div>
+
                     {/* Password input */}
                     <div className="form-outline mb-4">
                       <input
+                        name="password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        onBlur={() => handleInputBlur("password")}
+                        onFocus={() => handleInputFocus("password")}
                         type="password"
                         id="form3Example4"
                         className="form-control"
                       />
-                      <label className="form-label" htmlFor="form3Example4">
+                      {(!formik.values.password || focusState.password) && (
+                        <label className="form-label" htmlFor="form3Example4">
+                          Password
+                        </label>
+                      )}
+
+                      {/* <label className="form-label" htmlFor="form3Example4">
                         Password
-                      </label>
+                      </label> */}
                     </div>
                     <div className="form-check d-flex justify-content-center mb-4">
                       <label
@@ -151,8 +203,9 @@ function Register(props) {
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mb-4"
+                      disabled={formik.isSubmitting}
                     >
-                      Sign up
+                      {formik.isSubmitting ? "Registering..." : "Register"}
                     </button>
                     {/* Register buttons */}
                     <div className="text-center">
@@ -183,10 +236,7 @@ function Register(props) {
             </div>
           </div>
         </div>
-        {/* Jumbotron */}
       </section>
-      {/* Section: Design Block */}
-      {/* MDB */}
     </div>
 
     // <div className={`${classes.container}`}>
