@@ -4,6 +4,7 @@ import { useState,useEffect } from "react";
 import axios, { AxiosError } from "axios";
 import ExistingImages from "./ExistingImages/ExistingImages";
 import ImagesHero from "./ImagesHero";
+import Footer from "../Footer/Footer";
 
 const Images = () => {
   const [images, setImages] = useState([]);
@@ -45,6 +46,7 @@ const Images = () => {
       <ImagesHero />
       <NewImage onImageAdded={imageAddedHandler}/>
       <ExistingImages images={images} onImageDeleted={imageDeletedHandler}/>
+      <Footer/>
     </>
   );
 };
