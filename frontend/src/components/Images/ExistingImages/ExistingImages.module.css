@@ -89,7 +89,7 @@
   background-color: rgba(0, 0, 0, 0.9);
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
