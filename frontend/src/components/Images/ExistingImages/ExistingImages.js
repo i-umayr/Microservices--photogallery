@@ -99,6 +99,7 @@ const ExistingImages = ({ images,onImageDeleted }) => {
               src={image.imageLink}
               className={styles.fullScreenTrigger}
               onClick={() => openFullScreen(image)}
+              alt=""
             />
           </div>
           <div className={styles.cardFooter}>
