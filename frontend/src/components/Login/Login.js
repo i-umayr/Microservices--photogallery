@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login(props) {
   const [focusState, setFocusState] = useState({
@@ -30,12 +32,13 @@ function Login(props) {
         },
       });
       localStorage.setItem("authToken", response.data.token);
+      toast.success('Login successful!');
       navigate("/");
     } catch (err) {
       if (err && err instanceof AxiosError)
         setError(err.response?.data.message);
       else if (err && err instanceof Error) setError(err.message);
-
+      toast.error('Wrong Credentials!');
       console.log("Error: ", err);
     }
   };
@@ -231,7 +234,10 @@ function Login(props) {
           </div>
         </div>
       </section>
+      <ToastContainer position="bottom-center" />
     </div>
+
+    
 
     // <div className={`${classes.container}`}>
     //   <form

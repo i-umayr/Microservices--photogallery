@@ -3,7 +3,8 @@ import { useFormik } from "formik";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Register(props) {
   const [focusState, setFocusState] = useState({
@@ -33,7 +34,8 @@ function Register(props) {
         },
       });
       localStorage.setItem("authToken", response.data.token);
-      navigate("/");
+      toast.success('Account created successful!');
+      navigate("/login");
     } catch (err) {
       if (err && err instanceof AxiosError)
         setError(err.response?.data.message);
@@ -271,6 +273,7 @@ function Register(props) {
           </div>
         </div>
       </section>
+      <ToastContainer position="bottom-center" />
     </div>
 
     // <div className={`${classes.container}`}>
