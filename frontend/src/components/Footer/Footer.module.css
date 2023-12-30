@@ -6,10 +6,10 @@
     border: 2px solid rgba(255, 255, 255, 0.18);
     color: #fff;
     padding-top: 10px;
-    margin: 2rem;
-    border-radius: 4rem;
+    margin: 2rem 4rem;
+    border-radius: 3rem;
   }
-  
+
   .footer a {
     color: #aaa;
   }
@@ -58,7 +58,7 @@
   .footer .imgThumbnail {
     /* background: rgba(0, 0, 0, 0.2); */
     /* border: 1px solid #444; */
-    /* margin-bottom: 5px; */
+    margin-bottom: 5px;
     border-radius: 8px;
   }
   
@@ -104,3 +104,14 @@
     margin: 0.5rem;
   }
   
+
+  @media (max-width: 500px) {
+    .footer {
+      margin: 1rem;
+    }
+
+    .socialList {
+      font-size: 1rem;
+      padding: 1rem;
+    }
+  }

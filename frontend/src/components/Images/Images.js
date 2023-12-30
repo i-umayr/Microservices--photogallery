@@ -3,7 +3,7 @@ import { useAuthUser } from "react-auth-kit";
 import { useState,useEffect } from "react";
 import axios, { AxiosError } from "axios";
 import ExistingImages from "./ExistingImages/ExistingImages";
-import ImagesHero from "./ImagesHero";
+import ImagesHero from "./ImageHero/ImagesHero";
 import Footer from "../Footer/Footer";
 
 const Images = () => {

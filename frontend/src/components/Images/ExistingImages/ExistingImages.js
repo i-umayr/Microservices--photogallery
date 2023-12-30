@@ -86,7 +86,7 @@ const ExistingImages = ({ images,onImageDeleted }) => {
 
   return (
     <>
-    <LoadingBar color='#4500FF' ref={ref} />
+    <LoadingBar color='#FFB700' ref={ref} />
 
     <div className={styles.imageGrid}>
       {images.map((image, index) => (
