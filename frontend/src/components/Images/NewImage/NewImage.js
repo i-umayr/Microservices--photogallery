@@ -3,6 +3,8 @@ import { useAuthUser } from 'react-auth-kit'
 import { useEffect } from 'react';
 import styles from './NewImage.module.css';
 import LoadingBar from 'react-top-loading-bar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import axios, { AxiosError } from "axios";
 const NewImage = ({ onImageAdded }) => {
@@ -56,9 +58,10 @@ const NewImage = ({ onImageAdded }) => {
     } catch (error) {
       console.log(error);
       ref.current.complete();
-
+      toast.error('Storage alert! Check your usage.');
     }
   };
+
   return (
     <>
       <LoadingBar color='#FFB700' ref={ref} />

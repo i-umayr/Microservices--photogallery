@@ -5,6 +5,8 @@ import classes from "./MainNavigation.module.css";
 import { useSignOut } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 import { useIsAuthenticated } from "react-auth-kit";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MainNavigation = () => {
   const signOut = useSignOut();
@@ -17,6 +19,7 @@ const MainNavigation = () => {
   };
 
   const LogoutHandler = () => {
+    toast.success('Logout successful!');
     signOut();
     navigate("/");
   };

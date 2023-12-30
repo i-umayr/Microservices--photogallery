@@ -4,6 +4,8 @@ import axios, { AxiosError } from "axios";
 import { useRef } from "react";
 import { useAuthUser } from "react-auth-kit";
 import LoadingBar from 'react-top-loading-bar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ExistingImages = ({ images,onImageDeleted }) => {
   const [fullScreenImage, setFullScreenImage] = useState(null);
@@ -52,8 +54,10 @@ const ExistingImages = ({ images,onImageDeleted }) => {
       document.body.appendChild(link);
       link.click();
       link.parentNode.removeChild(link);
+      toast.success(`Downloaded: ${imageName}`);
     } catch (error) {
       console.error("Download failed:", error.message);
+      toast.error('Download failed');
     }
   };
 
