@@ -162,7 +162,6 @@ const ExistingImages = ({ images,onImageDeleted }) => {
         </>
       )}
     </div>
-    <ToastContainer position="bottom-center" />
     </>
   );
 };

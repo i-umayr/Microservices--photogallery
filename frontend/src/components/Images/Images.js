@@ -60,7 +60,6 @@ const Images = () => {
       <ExistingImages images={images} onImageDeleted={imageDeletedHandler}/>
       <Footer/>
 
-      <ToastContainer position="bottom-center" />
     </>
   );
 };

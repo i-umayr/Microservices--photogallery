@@ -81,7 +81,6 @@ const MainNavigation = () => {
           </div>
         </div>
       </nav>
-      <ToastContainer position="bottom-center" />
     </>
   );
 };

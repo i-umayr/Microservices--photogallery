@@ -273,7 +273,7 @@ function Register(props) {
           </div>
         </div>
       </section>
-      <ToastContainer position="bottom-center" />
+     
     </div>
 
     // <div className={`${classes.container}`}>

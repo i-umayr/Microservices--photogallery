@@ -234,7 +234,7 @@ function Login(props) {
           </div>
         </div>
       </section>
-      <ToastContainer position="bottom-center" />
+      
     </div>
 
     
