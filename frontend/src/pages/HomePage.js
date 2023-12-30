@@ -3,6 +3,7 @@ import MainNavigation from "../components/MainNavigation/MainNavigation";
 // import myImage from "../../public/images/home.jpg";
 import styles from './HomePage.module.css';
 import './styles.css';
+import Footer from '../components/Footer/Footer'
 
 const HomePage = () => {
   return (
@@ -18,6 +19,7 @@ const HomePage = () => {
         <img src={process.env.PUBLIC_URL + '/images/home.jpg'} alt="Home" className={styles.homeImage}/>
       </div>
 
+      <Footer/>
     </>
   );
 };
