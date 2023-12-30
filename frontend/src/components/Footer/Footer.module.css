@@ -56,9 +56,10 @@
   }
   
   .footer .imgThumbnail {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid #444;
-    margin-bottom: 5px;
+    /* background: rgba(0, 0, 0, 0.2); */
+    /* border: 1px solid #444; */
+    /* margin-bottom: 5px; */
+    border-radius: 8px;
   }
   
   .footer .copyright {
