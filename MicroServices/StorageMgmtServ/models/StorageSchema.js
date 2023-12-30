@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const storageSchema = new mongoose.Schema({
+const usageSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true,
@@ -20,6 +20,6 @@ const storageSchema = new mongoose.Schema({
   }
 });
 
-const Storage = mongoose.model('Storage', storageSchema);
+const Storage = mongoose.model('Storage', usageSchema);
 
 module.exports = {Storage};

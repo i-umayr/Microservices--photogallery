@@ -10,6 +10,10 @@ const ExistingImages = ({ images,onImageDeleted }) => {
   const [showOptions, setShowOptions] = useState(null);
   const auth = useAuthUser();
 
+
+  useEffect(()=>{
+    console.log(images)
+  },[])
   const toggleOptions = (event, image) => {
     const rect = event.target.getBoundingClientRect();
     setOptionsPosition({
