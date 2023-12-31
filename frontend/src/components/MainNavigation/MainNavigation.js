@@ -36,13 +36,8 @@ const MainNavigation = () => {
       <nav className={`${classes.blurredNavbar} navbar navbar-expand-lg p-1`}>
         <div className="container-fluid">
           <div className="d-flex align-items-center">
-<<<<<<< HEAD
-            <NavLink to="/" className={`${classes.logo}`}>
-              Photolicious
-=======
             <NavLink to="/" className={` ${classes.logo}`}>
               <img src={logoImg} alt="logo img" />PhotoPhilic
->>>>>>> 6964a13e26ea234f2dd5070d5ec855b3a9405f94
             </NavLink>
 
             <button
