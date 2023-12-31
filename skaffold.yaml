@@ -15,37 +15,37 @@ build:
       buildpacks:
         builder: gcr.io/buildpacks/builder:v1
     - image: ranamahadahmer/gallerymgmt
-      context: MicroServices/StorageMgmtServ
+      context: MicroServices/QueryServ
       buildpacks:
         builder: gcr.io/buildpacks/builder:v1
     - image: ranamahadahmer/logging
+      context: MicroServices/StorageMgmtServ
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: ranamahadahmer/query
+      context: MicroServices/EventBusServ
+      docker:
+        dockerfile: Dockerfile
+    - image: ranamahadahmer/storagemgmt
       context: MicroServices/UsageMntrServ
       buildpacks:
         builder: gcr.io/buildpacks/builder:v1
-    - image: ranamahadahmer/storagemgmt
-      context: MicroServices/UserAccMgmtServ
-      buildpacks:
-        builder: gcr.io/buildpacks/builder:v1
     - image: ranamahadahmer/usagemntr
-      context: MicroServices/ViewGeneratorServ
+      context: MicroServices/UserAccMgmtServ
       buildpacks:
         builder: gcr.io/buildpacks/builder:v1
     - image: ranamahadahmer/useraccmgmt
       context: MicroServices/loggingServ
       buildpacks:
         builder: gcr.io/buildpacks/builder:v1
-    - image: ranamahadahmer/viewgenerator
-      context: frontend
-      buildpacks:
-        builder: gcr.io/buildpacks/builder:v1
 manifests:
   rawYaml:
-    - infrastructure/k8s/eventbus-depl.yaml
-    - infrastructure/k8s/frontend-depl.yaml
-    - infrastructure/k8s/gallerymgmt-depl.yaml
-    - infrastructure/k8s/ingress-serv.yaml
-    - infrastructure/k8s/logging-depl.yaml
-    - infrastructure/k8s/storagemgmt-depl.yaml
-    - infrastructure/k8s/usagemntr-depl.yaml
-    - infrastructure/k8s/useraccmgmt-depl.yaml
-    - infrastructure/k8s/viewgenerator-depl.yaml
+    - k8s/eventbus-depl.yaml
+    - k8s/frontend-depl.yaml
+    - k8s/gallerymgmt-depl.yaml
+    - k8s/ingress-serv.yaml
+    - k8s/logging-depl.yaml
+    - k8s/query-depl.yaml
+    - k8s/storagemgmt-depl.yaml
+    - k8s/usagemntr-depl.yaml
+    - k8s/useraccmgmt-depl.yaml

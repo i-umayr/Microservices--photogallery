@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Welcome.module.css';
 
 const Welcome = () => {
-    const bgImage = `${process.env.PUBLIC_URL}/images/home.jpg`;
+    const bgImage = `assetimages/home.jpg`;
 
     return (
         <div

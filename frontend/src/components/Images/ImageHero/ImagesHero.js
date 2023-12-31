@@ -56,11 +56,6 @@ const ImagesHero = ({ storage, bandwidth, profile }) => {
       </div>
 
       <div className={styles.imageContainer}>
-        {/* <img
-          className={styles.image}
-          src={`${process.env.PUBLIC_URL}/images/home.jpg`}
-          alt=""
-        /> */}
     
         <Doughnut data={storageData} options={doughnutOptions}  />
         <Doughnut data={bandwidthData} options={doughnutOptions} />
