@@ -48,13 +48,6 @@ export default function Footer() {
               <li><FaStackOverflow /></li>
             </ul>
           </div>
-
-          {/* <div className={styles.footerImages}>
-            <img className={styles.imgThumbnail} src={process.env.PUBLIC_URL + '/images/placeholder1.png'} alt="Placeholder 1" />
-            <img className={styles.imgThumbnail} src={process.env.PUBLIC_URL + '/images/placeholder2.png'} alt="Placeholder 2" />
-            <img className={styles.imgThumbnail} src={process.env.PUBLIC_URL + '/images/placeholder3.png'} alt="Placeholder 3" />
-          </div> */}
-
         </div>
 
         <div className={styles.copyright}>

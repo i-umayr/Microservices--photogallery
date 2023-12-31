@@ -3,8 +3,6 @@ import styles from './About.module.css'; // Import the CSS module
 import { useNavigate } from "react-router-dom";
 
 
-const image = `assestImages/about.jpg`;
-
 const About = () => {
     const navigate = useNavigate();
 
@@ -44,7 +42,7 @@ const About = () => {
                     </div>
                 </div>
                 <div className={styles['about-image']}>
-                    <img src={image} alt="About Us" style={{
+                    <img src="assetImages/about.jpg" alt="About Us" style={{
                     }} />
                 </div>
             </div>

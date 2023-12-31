@@ -15,7 +15,6 @@ import { FaUser } from "react-icons/fa";
 
 const MainNavigation = () => {
 
-  const logoImg = `assetImages/icon.png`;
 
   const signOut = useSignOut();
   const navigate = useNavigate();
@@ -38,7 +37,7 @@ const MainNavigation = () => {
         <div className="container-fluid">
           <div className="d-flex align-items-center">
             <NavLink to="/" className={` ${classes.logo}`}>
-              <img src={logoImg} alt="logo img" />Photolicious
+              <img src="assetImages/icon.png" alt="logo img" />Photolicious
             </NavLink>
 
             <button

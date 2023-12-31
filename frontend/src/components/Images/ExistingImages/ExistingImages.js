@@ -3,17 +3,17 @@ import styles from "./ExistingImages.module.css";
 import axios, { AxiosError } from "axios";
 import { useRef } from "react";
 import { useAuthUser } from "react-auth-kit";
-import LoadingBar from 'react-top-loading-bar';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import LoadingBar from "react-top-loading-bar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { setImagesData } from "../../../store/slices/UserSlice";
 
-const ExistingImages = ({ images,onImageDeleted }) => {
+const ExistingImages = ({ images, onImageDeleted }) => {
   const [fullScreenImage, setFullScreenImage] = useState(null);
   const [optionsPosition, setOptionsPosition] = useState({ top: 0, left: 0 });
   const [showOptions, setShowOptions] = useState(null);
-  
+
   const dispatch = useDispatch();
   const auth = useAuthUser();
 
@@ -33,6 +33,7 @@ const ExistingImages = ({ images,onImageDeleted }) => {
     }
   };
   const openFullScreen = (image) => {
+    setShowOptions(null);
     setFullScreenImage(image);
   };
 
@@ -61,7 +62,7 @@ const ExistingImages = ({ images,onImageDeleted }) => {
       toast.success(`Downloaded: ${imageName}`);
     } catch (error) {
       console.error("Download failed:", error.message);
-      toast.error('Download failed');
+      toast.error("Download failed");
     }
   };
 
@@ -77,18 +78,18 @@ const ExistingImages = ({ images,onImageDeleted }) => {
           "Content-Type": "multipart/form-data",
         },
       };
-      console.log(`${image._id}`)
-      console.log(`${userId}`)
+      console.log(`${image._id}`);
+      console.log(`${userId}`);
 
       const response = await axios.delete(
         `${process.env.REACT_APP_GALLERY_BACKEND}/images/${userId}/${image._id}`,
         config
       );
-      const data=response.data;
-      console.log(data)
-      dispatch(setImagesData({data}))
-      
-    toast.success('Image deleted successfully!');
+      const data = response.data;
+      console.log(data);
+      dispatch(setImagesData({ data }));
+
+      toast.success("Image deleted successfully!");
       ref.current.complete();
     } catch (error) {
       console.error("Error Deleting image:", error);
@@ -96,83 +97,83 @@ const ExistingImages = ({ images,onImageDeleted }) => {
     }
   };
 
-
-
-
   return (
     <>
-    <LoadingBar color='#FFB700' ref={ref} />
+      <LoadingBar color="#FFB700" ref={ref} />
 
-    <div className={styles.imageGrid}>
-      {images.map((image, index) => (
-        <div className={styles.imageCard} key={index}>
-          <div className={styles.cardHeader}>
-            <p className={styles.imageTitle}>{image.title}</p>
-          </div>
-          <div className={styles.cardBody}>
-            <img
-              src={image.imageLink}
-              className={styles.fullScreenTrigger}
-              onClick={() => openFullScreen(image)}
-              alt=""
-            />
-          </div>
-          <div className={styles.cardFooter}>
-            <p className={styles.imageSize}>{Math.ceil(image.size)} KB</p>
-            <div
-              className={styles.optionsButton}
-              onClick={(event) => toggleOptions(event, image)}
-            >
-              ...
+      <div className={styles.imageGrid}>
+        {images.map((image, index) => (
+          <div className={styles.imageCard} key={index}>
+            <div className={styles.cardHeader}>
+              <p className={styles.imageTitle}>{image.title}</p>
             </div>
-
-            {showOptions && (
+            <div className={styles.cardBody}>
+              <img
+                src={image.imageLink}
+                className={styles.fullScreenTrigger}
+                onClick={() => openFullScreen(image)}
+                alt=""
+              />
+            </div>
+            <div className={styles.cardFooter}>
+              <p className={styles.imageSize}>{Math.ceil(image.size)} KB</p>
               <div
-                className={styles.options}
-                style={{ top: optionsPosition.top, left: optionsPosition.left }}
-                key={`options_${index}`}
+                className={styles.optionsButton}
+                onClick={(event) => toggleOptions(event, image)}
               >
-                <div
-                  className={styles.option}
-                  onClick={() => handleView(showOptions)}
-                >
-                  View
-                </div>
-                <div
-                  className={styles.option}
-                  onClick={() =>
-                    handleDownload(showOptions.imageLink, showOptions.title)
-                  }
-                >
-                  Download
-                </div>
-                <div
-                  className={styles.option}
-                  onClick={() => handleDelete(showOptions)}
-                >
-                  Delete
-                </div>
+                ...
               </div>
-            )}
+
+              {showOptions && (
+                <div
+                  className={styles.options}
+                  style={{
+                    top: optionsPosition.top,
+                    left: optionsPosition.left,
+                  }}
+                  key={`options_${index}`}
+                >
+                  <div
+                    className={styles.option}
+                    onClick={() => handleView(showOptions)}
+                  >
+                    View
+                  </div>
+                  <div
+                    className={styles.option}
+                    onClick={() =>
+                      handleDownload(showOptions.imageLink, showOptions.title)
+                    }
+                  >
+                    Download
+                  </div>
+                  <div
+                    className={styles.option}
+                    onClick={() => handleDelete(showOptions)}
+                  >
+                    Delete
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
-      {fullScreenImage && (
-        <>
-          <div className={styles.fullScreenOverlay} onClick={closeFullScreen}>
-            <img
-              src={fullScreenImage.imageLink}
-              alt={fullScreenImage.title}
-              className={styles.fullScreenImage}
-              onClick={(e) => e.stopPropagation()}
-            />
-            <span className={styles.closeButton} onClick={closeFullScreen}>
-              &#10005;
-            </span>
-          </div>
-        </>
-      )}
-    </div>
+        ))}
+        {fullScreenImage && (
+          <>
+            <div className={styles.fullScreenOverlay} onClick={closeFullScreen}>
+              <img
+                src={fullScreenImage.imageLink}
+                alt={fullScreenImage.title}
+                className={styles.fullScreenImage}
+                onClick={(e) => e.stopPropagation()}
+              />
+              <span className={styles.closeButton} onClick={closeFullScreen}>
+                &#10005;
+              </span>
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 };

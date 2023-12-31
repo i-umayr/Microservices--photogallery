@@ -4,11 +4,6 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import styles from './HomeCards.module.css'
 
 
-const image1 = `assestImages/cardimages/access-from-anywhere.jpg`;
-const image2 = `assestImages/cardimages/file-backups.jpg`;
-const image3 = `assestImages/cardimages/data-privacy-protection.jpg`;
-
-
 export default function HomeCards() {
     return (
         <div style={{ margin: '2rem', padding: '1rem', color: '#fff' }}>
@@ -17,7 +12,7 @@ export default function HomeCards() {
             
             <CardGroup>
                 <Card className={styles.card}>
-                    <Card.Img variant="top" src={image1} className={styles.cardImages}/>
+                    <Card.Img variant="top" src="assetImages/cardimages/access.jpg" className={styles.cardImages}/>
                     <Card.Body>
                         <Card.Title>Access files anytime, anywhere</Card.Title>
                         <Card.Text>
@@ -26,7 +21,7 @@ export default function HomeCards() {
                     </Card.Body>
                 </Card >
                 <Card className={styles.card}>
-                    <Card.Img variant="top" src={image2} className={styles.cardImages}/>
+                    <Card.Img variant="top" src="assetImages/cardimages/backups.jpg" className={styles.cardImages}/>
                     <Card.Body>
                         <Card.Title>Enjoy Complimentary Storage and Bandwidth!</Card.Title>
                         <Card.Text>
@@ -35,7 +30,7 @@ export default function HomeCards() {
                     </Card.Body>
                 </Card>
                 <Card className={styles.card}>
-                    <Card.Img variant="top" src={image3} className={styles.cardImages}/>
+                    <Card.Img variant="top" src="assetImages/cardimages/privacy.jpg" className={styles.cardImages}/>
                     <Card.Body>
                         <Card.Title>Secure & Compliant</Card.Title>
                         <Card.Text>

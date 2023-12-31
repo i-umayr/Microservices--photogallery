@@ -2,13 +2,13 @@ import React from 'react';
 import styles from './Welcome.module.css';
 
 const Welcome = () => {
-    const bgImage = `assetimages/home.jpg`;
+    const bgImage = ``;
 
     return (
         <div
             className={styles.container}
             style={{
-                backgroundImage: `url(${bgImage})`,
+                backgroundImage: "url(assetimages/home.jpg)",
                 backgroundSize: 'cover',
             }}
         >

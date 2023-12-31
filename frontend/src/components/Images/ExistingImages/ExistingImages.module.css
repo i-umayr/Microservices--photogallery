@@ -38,10 +38,10 @@
 .cardHeader,
 .cardFooter {
   padding: 10px;
-  background-color: #f0f0f0;
+  background-color: rgba(0, 0, 0, 0.1); 
+  color:rgba(255, 255, 255, 0.829);
 }
 .cardHeader{
-    /* display: flex; */
   justify-content: center;
   align-items: center;
   display: none;
@@ -67,7 +67,6 @@
 
 .imageSize {
     margin: 0;
-    color: #777;
     font-size: 12px;
 }
 
@@ -115,13 +114,12 @@
 .optionsButton {
     cursor: pointer;
     font-size: 18px;
-    color: #777;
+    color: white;
     position: relative;
   }
   
   .options {
     position: absolute;
-    background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px;
@@ -129,6 +127,8 @@
     display: flex;
     flex-direction: column;
     z-index: 999;
+    
+  background-color: rgba(4, 37, 128, 0.1); 
   }
   
   .option {
@@ -137,6 +137,6 @@
   }
   
   .option:hover {
-    background-color: #f0f0f0;
+    background-color: #000270;
   }
   
