@@ -38,7 +38,7 @@ const MainNavigation = () => {
         <div className="container-fluid">
           <div className="d-flex align-items-center">
             <NavLink to="/" className={` ${classes.logo}`}>
-              <img src={logoImg} alt="logo img" />PhotoPhilic
+              <img src={logoImg} alt="logo img" />Photolicious
             </NavLink>
 
             <button

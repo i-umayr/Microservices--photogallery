@@ -18,6 +18,12 @@ font-weight: 700;
 font-style: normal;
 font-variant: small-caps;
 /* text-transform: uppercase; */
+  user-select: none;
+}
+
+.logo:hover {
+  cursor: pointer;
+  color: white;
 }
 
 .logo img{
@@ -33,6 +39,7 @@ font-variant: small-caps;
 
 .btn:hover {
   box-shadow: 3px 8px 3px rgba(31, 38, 135, 0.3);
+  color: white;
 }
 
 .list {
