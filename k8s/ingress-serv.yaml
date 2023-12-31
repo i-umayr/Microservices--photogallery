@@ -11,13 +11,6 @@ spec:
 
       http:
         paths:
-          - path: /
-            pathType: Exact
-            backend:
-              service:
-                name: frontend-cluster-serv
-                port:
-                  number: 3000
           - path: /users
             pathType: Prefix
             backend:
@@ -39,5 +32,12 @@ spec:
                 name: query-cluster-serv
                 port:
                   number: 4005
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-cluster-serv
+                port:
+                  number: 3000
 
 
