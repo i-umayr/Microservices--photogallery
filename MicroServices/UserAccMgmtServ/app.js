@@ -12,7 +12,7 @@ app.use(cors())
 
 const users = require("./routes/api/users");
 
-app.use("/users",users);
+app.use("/users/",users);
 app.post("/events", async (req, res) => {
   console.log("Event Received:", req.body.type);
 

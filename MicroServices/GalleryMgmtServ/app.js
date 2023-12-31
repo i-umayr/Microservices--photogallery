@@ -12,7 +12,7 @@ app.use(cors());
 
 const images = require("./routes/images");
 
-app.use("/images", images);
+app.use("/images/", images);
 app.post("/events", async (req, res) => {
   console.log("Event Received:", req.body.type);
   const { type, data } = req.body;
