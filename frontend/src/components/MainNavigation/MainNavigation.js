@@ -96,9 +96,26 @@ const MainNavigation = () => {
                 </NavLink>
               </li>
               {isAuthenticated() ? 
-              <li className="nav-item mx-3">
-                <NavLink to="/profile" className="nav-link" end>
-                  Profile
+              <li className="nav-item">
+                <NavLink 
+                  to="/profile" 
+                  className="nav-link" 
+                  end
+                  style={({ isActive }) => ({
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    borderRadius: '10px',
+                    boxShadow: isActive ? '0 3px 0px rgba(31, 38, 135)' : 'none'
+                  })}
+                >
+                  <AiFillPicture
+                    style={({ isActive }) => ({
+                      fontSize: '2rem',
+                      marginRight: '4px'
+                    })}
+                  /> Profile
                 </NavLink>
               </li>:null}
             </ul>
@@ -118,9 +135,9 @@ const MainNavigation = () => {
                 </>
               ) : (
                 <li className="nav-item">
-                  <button className={classes.btn} onClick={LogoutHandler}>
+                  <NavLink className={classes.btn} onClick={LogoutHandler}>
                   <FaSignOutAlt /> Logout
-                  </button>
+                  </NavLink>
                 </li>
               )}
             </ul>
