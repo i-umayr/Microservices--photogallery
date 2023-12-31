@@ -6,11 +6,15 @@ import { useAuthUser } from "react-auth-kit";
 import LoadingBar from 'react-top-loading-bar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { setImagesData } from "../../../store/slices/UserSlice";
 
 const ExistingImages = ({ images,onImageDeleted }) => {
   const [fullScreenImage, setFullScreenImage] = useState(null);
   const [optionsPosition, setOptionsPosition] = useState({ top: 0, left: 0 });
   const [showOptions, setShowOptions] = useState(null);
+  
+  const dispatch = useDispatch();
   const auth = useAuthUser();
 
   const ref = useRef(null);
@@ -73,11 +77,18 @@ const ExistingImages = ({ images,onImageDeleted }) => {
           "Content-Type": "multipart/form-data",
         },
       };
+      console.log(`${image._id}`)
+      console.log(`${userId}`)
+
       const response = await axios.delete(
-        `http://localhost:4002/images/${userId}/${image._id}`,
+        `${process.env.REACT_APP_GALLERY_BACKEND}/images/${userId}/${image._id}`,
         config
       );
-      onImageDeleted(response.data);
+      const data=response.data;
+      console.log(data)
+      dispatch(setImagesData({data}))
+      
+    toast.success('Image deleted successfully!');
       ref.current.complete();
     } catch (error) {
       console.error("Error Deleting image:", error);

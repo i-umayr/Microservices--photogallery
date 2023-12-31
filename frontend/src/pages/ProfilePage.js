@@ -3,6 +3,7 @@ import { useIsAuthenticated } from "react-auth-kit";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Profile from "../components/Profile/Profile"
+import Footer from "../components/Footer/Footer";
 const ImagesPage = () => {
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const ImagesPage = () => {
         <>
           <MainNavigation />
           <Profile />
+          <Footer/>
         </>
       ) : ""}
     </>

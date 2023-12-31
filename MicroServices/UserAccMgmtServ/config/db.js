@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
-
-mongoose.connect("mongodb+srv://ajavedbese21seecs:jani1243@cluster0.xjdvgvy.mongodb.net/authDB", {
+require('dotenv').config();
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

@@ -75,8 +75,12 @@ router.post("/add/:userId", async (req, res) => {
         return res.status(404).json({ error: 'User gallery not found' });
       }
 
-      if (totalSizeKB > userGallery.freeStorage || totalSizeKB > userGallery.freeBandwidth) {
-        return res.status(400).json({ error: 'Image size exceeds available storage or bandwidth' });
+      if (totalSizeKB > userGallery.freeStorage) {
+        return res.status(400).json({ error: 'Image size exceeds available bandwidth' });
+      }
+      if(totalSizeKB > userGallery.freeBandwidth){
+        return res.status(400).json({ error: 'Image size exceeds available bandwidth for today' });
+        
       }
       const imagesEv=[];
       for (const image of images) {
@@ -89,22 +93,26 @@ router.post("/add/:userId", async (req, res) => {
         };
         imageLinks.push(uploadedImage.secure_url);
         userGallery.images.push(newImage);
+        userGallery.freeStorage-=newImage.size;
+        userGallery.freeBandwidth-=newImage.size;
         imagesEv.push(newImage)
       }
       await userGallery.save();
+      const gallery=userGallery;
       try{
         await axios.post("http://localhost:4010/events", {
            type: "ImagesAdded",
            data: {
             userId,
             imagesEv,
+            gallery: gallery
            },
           });
         }
         catch(error){
           console.log(error)
-        }
-      res.status(200).json({ links: imageLinks, gallery: userGallery });
+      }
+      res.status(200).json({ links: imageLinks, gallery: gallery });
     }catch(error){
       
       console.error(error);
@@ -141,7 +149,8 @@ router.post("/add/:userId", async (req, res) => {
            data: {
             userId,
             imageId,
-            imageSize
+            imageSize,
+            gallery: userGallery
            },
           });
         }
