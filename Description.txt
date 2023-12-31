@@ -10,3 +10,35 @@ This repo is meant for a microservices application which will be built on Mern s
 
 Event Bus : 4010
 
+
+kubectl apply -f frontend-depl.yaml
+kubectl apply -f eventbus-depl.yaml
+kubectl apply -f gallerymgmt-depl.yaml
+kubectl apply -f logging-depl.yaml
+kubectl apply -f storagemgmt-depl.yaml
+kubectl apply -f usagemntr-depl.yaml
+kubectl apply -f useraccmgmt-depl.yaml
+kubectl apply -f viewgenerator-depl.yaml
+
+
+
+
+kubectl delete deployments frontend-depl
+kubectl delete deployments eventbus-depl
+kubectl delete deployments gallerymgmt-depl
+kubectl delete deployments logging-depl
+kubectl delete deployments storagemgmt-depl
+kubectl delete deployments usagemntr-depl
+kubectl delete deployments useraccmgmt-depl
+kubectl delete deployments viewgenerator-depl
+
+
+
+kubectl delete services frontend-cluster-serv
+kubectl delete services eventbus-cluster-serv
+kubectl delete services gallerymgmt-cluster-serv
+kubectl delete services logging-cluster-serv
+kubectl delete services storagemgmt-cluster-serv
+kubectl delete services usagemntr-cluster-serv
+kubectl delete services useraccmgmt-cluster-serv
+kubectl delete services viewgenerator-cluster-serv
