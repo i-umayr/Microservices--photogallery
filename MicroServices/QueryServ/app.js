@@ -4,11 +4,11 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const { Query } = require("./models/QuerySchema");
 const mongoose = require("./config/db");
-
+const cron = require("node-cron");
 require("dotenv").config();
 app.use(bodyParser.json());
 app.use(cors());
-const cron = require("node-cron");
+
 
 const queries = require("./routes/queries");
 
