@@ -34,7 +34,7 @@ const MainNavigation = () => {
 
   return (
     <>
-      <nav className={`${classes.blurredNavbar} navbar navbar-expand-lg p-1`}>
+      <nav className={`${classes.blurredNavbar} ${classes.navFonts} navbar navbar-expand-lg p-1`}>
         <div className="container-fluid">
           <div className="d-flex align-items-center">
             <NavLink to="/" className={` ${classes.logo}`}>
