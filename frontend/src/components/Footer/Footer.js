@@ -39,22 +39,22 @@ export default function Footer() {
             </ul>
 
             <ul className={`${styles.listUnstyled} ${styles.socialList}`}>
-              <li><FaFacebook /></li>
+              {/* <li><FaFacebook /></li> */}
               <li><FaGithub /></li>
               <li><FaInstagram /></li>
-              <li><FaYoutube /></li>
-              <li><FaTwitter /></li>
+              {/* <li><FaYoutube /></li> */}
+              {/* <li><FaTwitter /></li> */}
               <li><FaLinkedin /></li>
               <li><FaStackOverflow /></li>
               <li><FaCodepen /></li>
             </ul>
           </div>
 
-          <div className={styles.footerImages}>
+          {/* <div className={styles.footerImages}>
             <img className={styles.imgThumbnail} src={process.env.PUBLIC_URL + '/images/placeholder1.png'} alt="Placeholder 1" />
             <img className={styles.imgThumbnail} src={process.env.PUBLIC_URL + '/images/placeholder2.png'} alt="Placeholder 2" />
             <img className={styles.imgThumbnail} src={process.env.PUBLIC_URL + '/images/placeholder3.png'} alt="Placeholder 3" />
-          </div>
+          </div> */}
 
         </div>
 
