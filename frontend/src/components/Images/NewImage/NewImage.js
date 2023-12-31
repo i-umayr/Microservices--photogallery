@@ -66,7 +66,7 @@ const NewImage = ({ onImageAdded }) => {
 
     } catch (error) {
       console.log(error)
-      toast.error(error.response.data.data);
+      toast.error("Storage alert! Check your usage.");
       ref.current.complete();
     }
   };

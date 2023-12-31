@@ -15,7 +15,7 @@ const Images = () => {
       setImages(user.gallery.images)
     }
     console.log(user)
-  }, [user]);
+  }, [user, images]);
 
   return (
     <>
