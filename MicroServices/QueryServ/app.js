@@ -51,10 +51,10 @@ app.post("/events", async (req, res) => {
   }
   if (type === "ImagesAdded") {
     try {
-      const { userId, imagesEv } = data;
+      const { userId, imagesEv, gallery } = data;
       const query = await Query.findOne({ userId });
       if (query) {
-        query.gallery.images.push(...imagesEv);
+        query.gallery.images = gallery.images;
         await query.save();
         console.log("Updated Query for ImagesAdded event:", userId);
       }
@@ -65,12 +65,10 @@ app.post("/events", async (req, res) => {
 
   if (type === "ImageRemoved") {
     try {
-      const { userId, imageId, imageSize } = data;
+      const { userId, imageId, imageSize, gallery } = data;
       const query = await Query.findOne({ userId });
       if (query) {
-        query.gallery.images = query.gallery.images.filter(
-          (image) => image._id.toString() !== imageId
-        );
+        query.gallery.images = gallery.images;
         await query.save();
         console.log("Updated Query for ImageRemoved event:", userId);
       }

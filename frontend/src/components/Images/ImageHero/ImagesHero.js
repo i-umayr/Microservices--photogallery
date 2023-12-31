@@ -6,19 +6,17 @@ import { Doughnut } from "react-chartjs-2";
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
-// Chart.register(ArcElement);
-
 const doughnutOptions = {
   plugins: {
     legend: {
       labels: {
-        color: "white", // Set text color here
+        color: "white", 
       },
     },
   },
 };
 
-const ImagesHero = ({ storage, bandwidth }) => {
+const ImagesHero = ({ storage, bandwidth, profile }) => {
   const formattedStorage = (storage / 1000).toFixed(2);
   const formattedBandwidth = (bandwidth / 1000).toFixed(2);
 
@@ -45,12 +43,7 @@ const ImagesHero = ({ storage, bandwidth }) => {
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>Welcome to our Image Gallery</h1>
-        <p className={styles.description}>
-          Unlock memories, store freely. Your visual time capsule - where images
-          linger and stories await. Limited storage, unlimited tales. Share the
-          secret with friends.
-        </p>
+        <h1 className={`${styles.title} mb-4`}>Welcome {profile.username}, to Photolicious</h1>
         <p className={styles.description}>
           Total Storage: 10 Mb
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

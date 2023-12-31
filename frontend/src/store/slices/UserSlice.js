@@ -27,13 +27,32 @@ export const UserSlice = createSlice({
   initialState,
   reducers: {
     setUserData:(state,action)=>{
-      state.userData=action.payload.userData
+      state.userData=action.payload.data
+    },
+    setImagesData: (state, action) => {
+      const { gallery} = action.payload.data;
+    
+      state.userData.gallery = {
+        ...state.userData.gallery,
+        images: [...gallery.images]
+      };
+    
+      state.userData.storage = {
+        ...state.userData.storage,
+        UsedStorage: 10000 - gallery.freeStorage,
+        FreeStorage: gallery.freeStorage,
+      };
+    
+      state.userData.usage = {
+        ...state.userData.usage,
+        bandwidthDailyUsage: 25000 - gallery.freeBandwidth,
+      };
     }
   },
      
     
 })
 
-export const { setUserData } = UserSlice.actions
+export const { setUserData,setImagesData } = UserSlice.actions
 
 export default UserSlice.reducer

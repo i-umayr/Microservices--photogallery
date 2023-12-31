@@ -8,5 +8,5 @@ This repo is meant for a microservices application which will be built on Mern s
 4004: usagemntr
 4005: Query
 
-Event Bus : 5000
+Event Bus : 4010
 

@@ -6,12 +6,16 @@ import LoadingBar from 'react-top-loading-bar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { setImagesData } from "../../../store/slices/UserSlice";
 import axios, { AxiosError } from "axios";
 const NewImage = ({ onImageAdded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const auth = useAuthUser()
   const fileInputRef = useRef(null);
   const ref = useRef(null);
+  
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedFiles.length > 0) {
@@ -40,7 +44,7 @@ const NewImage = ({ onImageAdded }) => {
       for (let pair of formData.entries()) {
         console.log(pair[0], pair[1]);
       }
-      const url = `http://localhost:4002/images/add/${userId}`;
+      const url = `${process.env.REACT_APP_GALLERY_BACKEND}/images/add/${userId}`;
 
       const config = {
         headers: {
@@ -52,13 +56,18 @@ const NewImage = ({ onImageAdded }) => {
         fileInputRef.current.value = '';
       }
       const response = await axios.post(url, formData, config);
-      onImageAdded(response.data);
+      console.log(response)
+      const data=response.data;
+      console.log(data)
+      
+      dispatch(setImagesData({data}))
+      toast.success('Image added successfully!');
       ref.current.complete();
 
     } catch (error) {
-      console.log(error);
+      console.log(error)
+      toast.error(error.response.data.data);
       ref.current.complete();
-      toast.error('Storage alert! Check your usage.');
     }
   };
 
