@@ -6,6 +6,7 @@ import './styles.css';
 import Footer from '../components/Footer/Footer'
 import HomeCards from "../components/HomeCards/HomeCards";
 import Welcome from "../components/Welcome/Welcome";
+import About from "../components/About/About";
 
 const HomePage = () => {
   return (
@@ -15,6 +16,8 @@ const HomePage = () => {
       <MainNavigation />
 
       <Welcome/>
+
+      <About />
 
       {/* <div className={styles.homepage}>
         <div className="homeContainer">
