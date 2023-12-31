@@ -54,7 +54,7 @@ app.post("/events", async (req, res) => {
       console.log("Usage updated for ImagesAdded event:", userId);
 
       try {
-        await axios.post("http://localhost:4010/events", {
+        await axios.post(`${process.env.EVENT_SERV}/events`, {
           type: "UsageUpdated",
           data: {
             userId,
