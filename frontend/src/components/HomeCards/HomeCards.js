@@ -26,9 +26,9 @@ export default function HomeCards() {
                 <Card className={styles.card}>
                     <Card.Img variant="top" src={image2} className={styles.cardImages}/>
                     <Card.Body>
-                        <Card.Title>Keep your work backed up</Card.Title>
+                        <Card.Title>Enjoy Complimentary Storage and Bandwidth!</Card.Title>
                         <Card.Text>
-                        We continuously back up your company's documents, ensuring you can restore any file at any time. Recover instantly from ransomware, hardware failure, and human error. Phew!
+                        As a valued user, you get 10MB of complimentary storage space to save your images securely. Additionally, relish the freedom of 25MB in daily bandwidth to effortlessly share and download your visual tales.
                         </Card.Text>
                     </Card.Body>
                 </Card>

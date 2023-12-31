@@ -76,7 +76,7 @@ router.post("/add/:userId", async (req, res) => {
       }
 
       if (totalSizeKB > userGallery.freeStorage) {
-        return res.status(400).json({ error: 'Image size exceeds available bandwidth' });
+        return res.status(400).json({ error: 'Image size exceeds available storage' });
       }
       if(totalSizeKB > userGallery.freeBandwidth){
         return res.status(400).json({ error: 'Image size exceeds available bandwidth for today' });

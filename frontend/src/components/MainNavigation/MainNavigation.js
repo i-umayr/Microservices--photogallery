@@ -10,7 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaUserPlus, FaSignInAlt } from 'react-icons/fa';
 import { AiFillHome, AiFillPicture } from 'react-icons/ai';
 import { FaSignOutAlt } from 'react-icons/fa';
-
+import { FaUserCircle } from 'react-icons/fa'
+import { FaUser } from "react-icons/fa";
 
 const MainNavigation = () => {
 
@@ -110,7 +111,7 @@ const MainNavigation = () => {
                     boxShadow: isActive ? '0 3px 0px rgba(31, 38, 135)' : 'none'
                   })}
                 >
-                  <AiFillPicture
+                  <FaUser
                     style={({ isActive }) => ({
                       fontSize: '2rem',
                       marginRight: '4px'
