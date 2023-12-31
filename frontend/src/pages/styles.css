@@ -2,7 +2,7 @@ html {
     margin: 0;
     padding: 0;
     font-family: "Roboto", sans-serif;
-    /* background-color: #ffcdd2; */
+    background-color: #ffffff;
     display: flex;
     position: relative;
     flex-direction: column;
@@ -28,7 +28,7 @@ html {
   
   body {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.3); /* white overlay with 50% opacity */
+    background-color: rgba(255, 255, 255, 0.2); /* white overlay with 50% opacity */
   }
   
   a {
