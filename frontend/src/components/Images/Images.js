@@ -1,46 +1,28 @@
 import NewImage from "./NewImage/NewImage";
-import { useAuthUser } from "react-auth-kit";
 import { useState,useEffect } from "react";
-import axios, { AxiosError } from "axios";
 import ExistingImages from "./ExistingImages/ExistingImages";
 import ImagesHero from "./ImageHero/ImagesHero";
 import Footer from "../Footer/Footer";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector, useDispatch } from "react-redux/es/exports";
 
 const Images = () => {
   const [images, setImages] = useState([]);
   const [storage, setStorage] = useState()
   const [bandwidth, setBandwidth] = useState()
-  const auth = useAuthUser();
+  const user = useSelector((state) => state.users.userData);
   useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const userId = auth().userId;
-        const token = auth().token;
-        const config = {
-            headers: {
-              Authorization: `${token}`,
-              'Content-Type': 'multipart/form-data',
-            },
-          };
-        const response = await axios.get(
-          `http://localhost:4002/images/${userId}`,config
-        );
-        console.log(response.data);
-        // console.log(response.data.gallery.freeStorage);
-        // console.log(response.data.gallery.freeBandwidth);
-    
-        setStorage(response.data.gallery.freeStorage)
-        setBandwidth(response.data.gallery.freeBandwidth)
-          setImages(response.data.gallery.images); 
-      } catch (error) {
-        console.error("Error fetching images:", error);
-      }
-    };
-
-    fetchImages();
-  }, [images]);
+    if(user.userData.gallery.images[0]){
+      setImages(user.userData.gallery.images)
+    }
+    if(user.userData.storage){
+      setStorage(response.data.storage.FreeStorage)
+    }
+    if(user.userData.usage){
+    setBandwidth(25000-response.data.usage.bandwidthDailyUsage)
+    }
+  }, [user]);
 
   const imageAddedHandler = (data) => {
     console.log(data)

@@ -54,8 +54,13 @@ const MainNavigation = () => {
                   Images
                 </NavLink>
               </li>
+              {isAuthenticated() ? 
+              <li className="nav-item mx-3">
+                <NavLink to="/profile" className="nav-link" end>
+                  Profile
+                </NavLink>
+              </li>:null}
             </ul>
-
             <ul className="navbar-nav ml-auto">
               {!isAuthenticated() ? (
                 <>

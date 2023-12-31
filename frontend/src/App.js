@@ -1,15 +1,13 @@
 import './App.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { RequireAuth } from "react-auth-kit";
-import RootLayoutPage from "./pages/RootLayout.js";
 import ErrorPage from './pages/ErrorPage.js';
 import HomePage from './pages/HomePage.js';
 import LoginPage from './pages/LoginPage.js';
 import RegisterPage from './pages/RegisterPage';
 import ImagesPage from './pages/ImagesPage';
+import ProfilePage from './pages/ProfilePage';
 import { ToastContainer } from 'react-toastify';
 function App() {
-  
   const router = createBrowserRouter([
     {
       path: "/",  
@@ -20,6 +18,13 @@ function App() {
       path: "/images",
       element: (
           <ImagesPage />
+      ),
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/profile",
+      element: (
+          <ProfilePage />
       ),
       errorElement: <ErrorPage />,
     },

@@ -110,7 +110,7 @@ app.post("/events", async (req, res) => {
   res.send({});
 });
 
-const port = process.env.PORT || 4003;
+const port = process.env.PORT || 4001;
 
 app.listen(port, () =>
   console.log(`Storage service Server up and running on port ${port}`)
