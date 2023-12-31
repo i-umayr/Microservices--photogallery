@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
           process.env.JWT_SECRET
         );
         try{
-        await axios.post("http://localhost:4010/events", {
+        await axios.post(`${process.env.EVENT_SERV}/events`, {
            type: "UserCreated",
            data: {
            userId: user._id,
@@ -91,7 +91,7 @@ router.post("/login", async (req, res) => {
       process.env.JWT_SECRET
     );
     try{
-      await axios.post("http://localhost:4010/events", {
+      await axios.post(`${process.env.EVENT_SERV}/events`, {
          type: "UserLoggedIn",
          data: {
          userId: userwithEmail._id,
