@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './About.module.css'; // Import the CSS module
 import { useNavigate } from "react-router-dom";
 
+
 const image = `assestImages/about.jpg`;
 
 const About = () => {
