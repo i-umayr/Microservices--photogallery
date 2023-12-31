@@ -3,6 +3,9 @@ import styles from "./ExistingImages.module.css";
 import axios, { AxiosError } from "axios";
 import { useRef } from "react";
 import { useAuthUser } from "react-auth-kit";
+import LoadingBar from 'react-top-loading-bar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ExistingImages = ({ images,onImageDeleted }) => {
   const [fullScreenImage, setFullScreenImage] = useState(null);
@@ -10,10 +13,9 @@ const ExistingImages = ({ images,onImageDeleted }) => {
   const [showOptions, setShowOptions] = useState(null);
   const auth = useAuthUser();
 
+  const ref = useRef(null);
+  // const ref = React.createRef();
 
-  useEffect(()=>{
-    console.log(images)
-  },[])
   const toggleOptions = (event, image) => {
     const rect = event.target.getBoundingClientRect();
     setOptionsPosition({
@@ -52,13 +54,16 @@ const ExistingImages = ({ images,onImageDeleted }) => {
       document.body.appendChild(link);
       link.click();
       link.parentNode.removeChild(link);
+      toast.success(`Downloaded: ${imageName}`);
     } catch (error) {
       console.error("Download failed:", error.message);
+      toast.error('Download failed');
     }
   };
 
   const handleDelete = async (image) => {
     setShowOptions(null);
+    ref.current.continuousStart();
     try {
       const userId = auth().userId;
       const token = auth().token;
@@ -72,12 +77,21 @@ const ExistingImages = ({ images,onImageDeleted }) => {
         `http://localhost:4002/images/${userId}/${image._id}`,
         config
       );
-      onImageDeleted(response.data)
+      onImageDeleted(response.data);
+      ref.current.complete();
     } catch (error) {
       console.error("Error Deleting image:", error);
+      ref.current.complete();
     }
   };
+
+
+
+
   return (
+    <>
+    <LoadingBar color='#FFB700' ref={ref} />
+
     <div className={styles.imageGrid}>
       {images.map((image, index) => (
         <div className={styles.imageCard} key={index}>
@@ -89,6 +103,7 @@ const ExistingImages = ({ images,onImageDeleted }) => {
               src={image.imageLink}
               className={styles.fullScreenTrigger}
               onClick={() => openFullScreen(image)}
+              alt=""
             />
           </div>
           <div className={styles.cardFooter}>
@@ -147,6 +162,7 @@ const ExistingImages = ({ images,onImageDeleted }) => {
         </>
       )}
     </div>
+    </>
   );
 };
 
