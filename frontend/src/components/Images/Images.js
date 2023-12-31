@@ -17,10 +17,10 @@ const Images = () => {
       setImages(user.userData.gallery.images)
     }
     if(user.userData.storage){
-      setStorage(response.data.storage.FreeStorage)
+      setStorage(user.userData.storage.FreeStorage)
     }
     if(user.userData.usage){
-    setBandwidth(25000-response.data.usage.bandwidthDailyUsage)
+    setBandwidth(25000-user.userData.usage.bandwidthDailyUsage)
     }
   }, [user]);
 
