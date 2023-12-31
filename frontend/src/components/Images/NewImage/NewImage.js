@@ -2,12 +2,16 @@ import { useState, useRef } from 'react';
 import { useAuthUser } from 'react-auth-kit'
 import { useEffect } from 'react';
 import styles from './NewImage.module.css';
+import LoadingBar from 'react-top-loading-bar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import axios, { AxiosError } from "axios";
 const NewImage = ({ onImageAdded }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const auth = useAuthUser()
   const fileInputRef = useRef(null);
+  const ref = useRef(null);
 
   useEffect(() => {
     if (selectedFiles.length > 0) {
@@ -23,6 +27,7 @@ const NewImage = ({ onImageAdded }) => {
 
   const imageUploadHandler = async (event) => {
     event.preventDefault();
+    ref.current.continuousStart();
 
     const formData = new FormData();
     for (let i = 0; i < selectedFiles.length; i++) {
@@ -48,12 +53,18 @@ const NewImage = ({ onImageAdded }) => {
       }
       const response = await axios.post(url, formData, config);
       onImageAdded(response.data);
+      ref.current.complete();
+
     } catch (error) {
       console.log(error);
+      ref.current.complete();
+      toast.error('Storage alert! Check your usage.');
     }
   };
+
   return (
     <>
+      <LoadingBar color='#FFB700' ref={ref} />
       <form encType="multipart/form-data" onSubmit={imageUploadHandler}>
       <input
         ref={fileInputRef}

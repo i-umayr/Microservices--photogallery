@@ -12,7 +12,7 @@
 
 .list a {
   text-decoration: none;
-  color: var(--color-primary-400);
+  color: white;
 }
 
 .list a:hover,
@@ -33,13 +33,19 @@
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: #212529;
+  color: white;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  /* background-color: #fff; */
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
+  /* border: 1px solid rgba(0, 0, 0, 0.15); */
+  /* border-radius: 0.25rem; */
+
+  background: rgba( 255, 255, 255, 0.1 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 0px );
+  -webkit-backdrop-filter: blur( 0px );
+  border-radius: 0px 0px 10px 10px;
 }
 
 .custom-dropdown-menu.show {
@@ -47,11 +53,38 @@
 }
 
 .blurredNavbar {
-  background: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba( 255, 255, 255, 0.1 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 0px );
+  -webkit-backdrop-filter: blur( 0px );
+  border-radius: 0px 0px 10px 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 99;
+  transition: background 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .blurredNavbar {
+  background: rgba( 255, 255, 255, 0.1 );
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-nav li {
+    margin: 0.5rem 0;
+  }
+
+  .navbar-nav,
+  .navbar-nav ul {
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    display: block;
+    margin-left: auto;
+  }
 }

@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage.js';
 import LoginPage from './pages/LoginPage.js';
 import RegisterPage from './pages/RegisterPage';
 import ImagesPage from './pages/ImagesPage';
+import { ToastContainer } from 'react-toastify';
 function App() {
   
   const router = createBrowserRouter([
@@ -40,6 +41,7 @@ function App() {
       <main>
       <RouterProvider router={router} />
       </main>
+      <ToastContainer position="bottom-center" />
     </div>
   );
 }
