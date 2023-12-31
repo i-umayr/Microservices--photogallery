@@ -3,9 +3,9 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import styles from './HomeCards.module.css'
 
-const image1 = `${process.env.PUBLIC_URL}/images/cardimages/access-from-anywhere.jpg`;
-const image2 = `${process.env.PUBLIC_URL}/images/cardimages/file-backups.jpg`;
-const image3 = `${process.env.PUBLIC_URL}/images/cardimages/data-privacy-protection.jpg`;
+const image1 = `/images/cardimages/access-from-anywhere.jpg`;
+const image2 = `/images/cardimages/file-backups.jpg`;
+const image3 = `/images/cardimages/data-privacy-protection.jpg`;
 
 export default function HomeCards() {
     return (
