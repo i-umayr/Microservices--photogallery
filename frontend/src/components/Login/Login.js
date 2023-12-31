@@ -62,6 +62,10 @@ function Login(props) {
     setFocusState((prevFocusState) => ({ ...prevFocusState, [field]: false }));
   };
 
+  const homeHandler = () => {
+    navigate("/")
+  }
+
   return (
     <div
       style={{
@@ -230,6 +234,18 @@ function Login(props) {
                             onClick={registerHandler}
                           >
                             Click here
+                          </span>
+                        </p>
+                        <p>
+                          <span
+                            style={{
+                              color: "#007bff",
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                            onClick={homeHandler}
+                          >
+                            Home Page
                           </span>
                         </p>
                       </div>

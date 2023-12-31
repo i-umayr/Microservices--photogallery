@@ -57,6 +57,10 @@ function Register(props) {
     onSubmit,
   });
 
+  const homeHandler = () => {
+    navigate("/")
+  }
+
   const handleInputFocus = (field) => {
     setFocusState((prevFocusState) => ({ ...prevFocusState, [field]: true }));
   };
@@ -264,6 +268,18 @@ function Register(props) {
                             onClick={loginHandler}
                           >
                             Click here
+                          </span>
+                        </p>
+                        <p>
+                          <span
+                            style={{
+                              color: "#007bff",
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                            onClick={homeHandler}
+                          >
+                            Home Page
                           </span>
                         </p>
                       </div>
