@@ -1,0 +1,51 @@
+apiVersion: skaffold/v4beta8
+kind: Config
+metadata:
+  name: microservices-photogallery
+build:
+  local:
+    push: false
+  artifacts:
+    - image: ranamahadahmer/eventbus
+      context: MicroServices/EventBusServ
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: ranamahadahmer/frontend
+      context: MicroServices/GalleryMgmtServ
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: ranamahadahmer/gallerymgmt
+      context: MicroServices/StorageMgmtServ
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: ranamahadahmer/logging
+      context: MicroServices/UsageMntrServ
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: ranamahadahmer/storagemgmt
+      context: MicroServices/UserAccMgmtServ
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: ranamahadahmer/usagemntr
+      context: MicroServices/ViewGeneratorServ
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: ranamahadahmer/useraccmgmt
+      context: MicroServices/loggingServ
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: ranamahadahmer/viewgenerator
+      context: frontend
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+manifests:
+  rawYaml:
+    - infrastructure/k8s/eventbus-depl.yaml
+    - infrastructure/k8s/frontend-depl.yaml
+    - infrastructure/k8s/gallerymgmt-depl.yaml
+    - infrastructure/k8s/ingress-serv.yaml
+    - infrastructure/k8s/logging-depl.yaml
+    - infrastructure/k8s/storagemgmt-depl.yaml
+    - infrastructure/k8s/usagemntr-depl.yaml
+    - infrastructure/k8s/useraccmgmt-depl.yaml
+    - infrastructure/k8s/viewgenerator-depl.yaml
