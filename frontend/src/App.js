@@ -53,7 +53,7 @@ function App() {
       errorElement: <ErrorPage />,
     },
     {
-      path: "/images",
+      path: "/gallery",
       element: (
           <ImagesPage />
       ),

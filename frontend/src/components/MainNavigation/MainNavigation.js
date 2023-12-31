@@ -15,7 +15,7 @@ import { FaUser } from "react-icons/fa";
 
 const MainNavigation = () => {
 
-  const logoImg = `${process.env.PUBLIC_URL}/images/icon.png`;
+  const logoImg = `assetImages/icon.png`;
 
   const signOut = useSignOut();
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ const MainNavigation = () => {
               </li>
               <li className="nav-item">
                 <NavLink 
-                  to="/images" 
+                  to="/gallery"
                   className="nav-link" 
                   end
                   style={({ isActive }) => ({

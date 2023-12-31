@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux/es/exports";
 const Profile = () => {
   const [profile, setProfile] = useState({ username: "", email: "" });
 
-  const [storage, setStorage] = useState();
-  const [bandwidth, setBandwidth] = useState();
+  const [storage, setStorage] = useState(0);
+  const [bandwidth, setBandwidth] = useState(0);
   const user = useSelector((state) => state.users.userData);
 
   useEffect(() => {
