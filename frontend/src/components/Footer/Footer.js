@@ -42,9 +42,10 @@ export default function Footer() {
               {/* <li><FaFacebook /></li> */}
               <li><FaGithub /></li>
               <li><FaInstagram /></li>
-              {/* <li><FaYoutube /></li> */}
+              <li><FaYoutube /></li>
               {/* <li><FaTwitter /></li> */}
               <li><FaLinkedin /></li>
+              <li><FaStackOverflow /></li>
             </ul>
           </div>
 
