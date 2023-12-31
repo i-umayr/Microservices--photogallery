@@ -8,6 +8,7 @@ const mongoose = require("./config/db");
 require("dotenv").config();
 app.use(bodyParser.json());
 app.use(cors());
+const cron = require("node-cron");
 
 const queries = require("./routes/queries");
 
@@ -111,6 +112,28 @@ app.post("/events", async (req, res) => {
   }
   res.send({});
 });
+
+// Schedule a cron job to run every day at 12 AM and reset bandwidth
+cron.schedule("0 0 * * *", async () => {
+  try {
+    // Reset bandwidth for all users to 25MB
+    const users = await Usage.find({});
+
+    for (const user of users) {
+      user.usage.bandwidthDailyUsage = 0;
+      await user.save();
+      console.log(`Bandwidth reset for user ${user.userId}`);
+    }
+
+    console.log("Bandwidth reset for all users");
+  } catch (error) {
+    console.error("Error resetting bandwidth:", error.message);
+  }
+}
+, {
+  timezone: "Asia/Karachi", // Set the desired time zone here
+}
+);
 
 const port = process.env.PORT || 4005;
 
