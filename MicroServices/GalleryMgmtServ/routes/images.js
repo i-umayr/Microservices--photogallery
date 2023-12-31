@@ -100,7 +100,7 @@ router.post("/add/:userId", async (req, res) => {
       await userGallery.save();
       const gallery=userGallery;
       try{
-        await axios.post("http://localhost:4010/events", {
+        await axios.post(`${process.env.EVENT_SERV}/events`, {
            type: "ImagesAdded",
            data: {
             userId,
@@ -144,7 +144,7 @@ router.post("/add/:userId", async (req, res) => {
       await userGallery.save();
       console.log(imageSize)
       try{
-        await axios.post("http://localhost:4010/events", {
+        await axios.post(`${process.env.EVENT_SERV}/events`, {
            type: "ImageRemoved",
            data: {
             userId,

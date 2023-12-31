@@ -8,52 +8,52 @@ app.use(
     extended: false,
   })
 );
-
+require("dotenv").config();
 app.use(bodyParser.json());
 app.post("/events", (req, res) => {
   const event = req.body;
   try {
-    axios.post("http://localhost:4000/events", event).catch((err) => {
+    axios.post(`${process.env.AUTH_SERV}/events`, event).catch((err) => {
       console.log(err.message);
     });
-  } catch (error) {
-    console.log(error);
-  }
+} catch (error) {
+  console.log(error);
+}
   try {
-    axios.post("http://localhost:4001/events", event).catch((err) => {
-      console.log(err.message);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  axios.post(`${process.env.STORAGE_SERV}/events`, event).catch((err) => {
+                            console.log(err.message);
+});
+} catch (error) {
+  console.log(error);
+}
   try {
-    axios.post("http://localhost:4002/events", event).catch((err) => {
-      console.log(err.message);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  axios.post(`${process.env.GALLERY_SERV}/events`, event).catch((err) => {
+                            console.log(err.message);
+});
+} catch (error) {
+  console.log(error);
+}
   try {
-    axios.post("http://localhost:4003/events", event).catch((err) => {
-      console.log(err.message);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  axios.post(`${process.env.LOG_SERV}/events`, event).catch((err) => {
+                        console.log(err.message);
+});
+} catch (error) {
+  console.log(error);
+}
   try {
-    axios.post("http://localhost:4004/events", event).catch((err) => {
-      console.log(err.message);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  axios.post(`${process.env.USAGE_SERV}/events`, event).catch((err) => {
+                          console.log(err.message);
+});
+} catch (error) {
+  console.log(error);
+}
   try {
-    axios.post("http://localhost:4005/events", event).catch((err) => {
-      console.log(err.message);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  axios.post(`${process.env.QUERY_SERV}/events`, event).catch((err) => {
+                          console.log(err.message);
+});
+} catch (error) {
+  console.log(error);
+}
   res.send({ status: "OK" });
 });
 

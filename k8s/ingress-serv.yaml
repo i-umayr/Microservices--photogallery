@@ -7,9 +7,17 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: photolicious.com
+    - host: localhost
+
       http:
         paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: frontend-cluster-serv
+                port:
+                  number: 3000
           - path: /users
             pathType: Prefix
             backend:
@@ -24,11 +32,12 @@ spec:
                 name: gallerymgmt-cluster-serv
                 port:
                   number: 4002
-          - path: /
+          - path: /queries
             pathType: Prefix
             backend:
               service:
-                name: frontend-cluster-serv
+                name: query-cluster-serv
                 port:
-                  number: 3000
+                  number: 4005
+
 

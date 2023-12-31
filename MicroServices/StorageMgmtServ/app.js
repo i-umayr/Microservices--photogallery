@@ -48,7 +48,7 @@ app.post("/events", async (req, res) => {
 
       await storage.save();
       try{
-        await axios.post("http://localhost:4010/events", {
+        await axios.post(`${process.env.EVENT_SERV}/events`, {
           type: "StorageUpdated",
           data: {
             userId,
@@ -87,7 +87,7 @@ app.post("/events", async (req, res) => {
 
       await storage.save();
       try{
-        await axios.post("http://localhost:4010/events", {
+        await axios.post(`${process.env.EVENT_SERV}/events`, {
           type: "StorageUpdated",
           data: {
             userId,
