@@ -42,6 +42,8 @@ kubectl delete deployments storagemgmt-depl
 kubectl delete deployments usagemntr-depl
 kubectl delete deployments useraccmgmt-depl
 kubectl delete deployments query-depl
+
+
 kubectl delete services frontend-cluster-serv
 kubectl delete services eventbus-cluster-serv
 kubectl delete services gallerymgmt-cluster-serv

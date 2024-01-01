@@ -1,51 +1,76 @@
-apiVersion: skaffold/v4beta8
+apiVersion: skaffold/v2alpha3
 kind: Config
 metadata:
   name: microservices-photogallery
+deploy:
+  kubectl:
+    manifests:
+        - ./k8s/*
 build:
-  local:
-    push: false
+  googleCloudBuild:
+    projectId: atomic-409916
   artifacts:
-    - image: ranamahadahmer/eventbus
-      context: MicroServices/EventBusServ
-      buildpacks:
-        builder: gcr.io/buildpacks/builder:v1
-    - image: ranamahadahmer/frontend
-      context: MicroServices/GalleryMgmtServ
-      buildpacks:
-        builder: gcr.io/buildpacks/builder:v1
-    - image: ranamahadahmer/gallerymgmt
-      context: MicroServices/QueryServ
-      buildpacks:
-        builder: gcr.io/buildpacks/builder:v1
-    - image: ranamahadahmer/logging
-      context: MicroServices/StorageMgmtServ
-      buildpacks:
-        builder: gcr.io/buildpacks/builder:v1
-    - image: ranamahadahmer/query
+    - image:  us.gcr.io/atomic-409916/frontend
+      context: frontend
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*"
+            dest: .
+    - image:  us.gcr.io/atomic-409916/eventbus
       context: MicroServices/EventBusServ
       docker:
         dockerfile: Dockerfile
-    - image: ranamahadahmer/storagemgmt
-      context: MicroServices/UsageMntrServ
-      buildpacks:
-        builder: gcr.io/buildpacks/builder:v1
-    - image: ranamahadahmer/usagemntr
-      context: MicroServices/UserAccMgmtServ
-      buildpacks:
-        builder: gcr.io/buildpacks/builder:v1
-    - image: ranamahadahmer/useraccmgmt
+      sync:
+        manual:
+          - src: "*"
+            dest: .
+    - image:  us.gcr.io/atomic-409916/gallerymgmt
+      context: MicroServices/GalleryMgmtServ
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*"
+            dest: .
+    - image:  us.gcr.io/atomic-409916/logging
       context: MicroServices/loggingServ
-      buildpacks:
-        builder: gcr.io/buildpacks/builder:v1
-manifests:
-  rawYaml:
-    - k8s/eventbus-depl.yaml
-    - k8s/frontend-depl.yaml
-    - k8s/gallerymgmt-depl.yaml
-    - k8s/ingress-serv.yaml
-    - k8s/logging-depl.yaml
-    - k8s/query-depl.yaml
-    - k8s/storagemgmt-depl.yaml
-    - k8s/usagemntr-depl.yaml
-    - k8s/useraccmgmt-depl.yaml
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*"
+            dest: .
+    - image:  us.gcr.io/atomic-409916/query
+      context: MicroServices/QueryServ
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*"
+            dest: .
+    - image:  us.gcr.io/atomic-409916/storagemgmt
+      context: MicroServices/StorageMgmtServ
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*"
+            dest: .
+    - image:  us.gcr.io/atomic-409916/usagemntr
+      context: MicroServices/UsageMntrServ
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*"
+            dest: .
+    - image:  us.gcr.io/atomic-409916/useraccmgmt
+      context: MicroServices/UserAccMgmtServ
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*"
+            dest: .

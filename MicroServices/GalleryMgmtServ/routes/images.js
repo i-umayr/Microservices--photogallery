@@ -7,6 +7,7 @@ const multer = require("multer");
 const upload = multer({ storage: storage });
 const { Gallery } = require("../models/GallerySchema");
 const formidable = require('formidable');
+const path =require("path");
 function verifyToken(req, res, next) {
   const token = req.header("Authorization");
   if (!token)
@@ -81,6 +82,15 @@ router.post("/add/:userId", async (req, res) => {
       if(totalSizeKB > userGallery.freeBandwidth){
         return res.status(400).json({ error: 'Image size exceeds available bandwidth for today' });
         
+      }
+      const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tif', '.tiff', '.webp', '.svg', '.ico', '.jfif', '.pjpeg', '.pjp'];
+      for (const image of images) {
+        const fileExtension = path.extname(image.originalFilename).toLowerCase();
+      console.log(fileExtension)
+      if (!validExtensions.includes(fileExtension)) {
+        console.log("hereeee in invlid extension")
+        return res.status(400).json({ error: 'Invalid file extension.' });
+      }
       }
       const imagesEv=[];
       for (const image of images) {

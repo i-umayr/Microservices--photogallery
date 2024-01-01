@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ranamahadahmer/frontend
+          image: us.gcr.io/atomic-409916/frontend
           ports:
             - containerPort: 3000
 ---

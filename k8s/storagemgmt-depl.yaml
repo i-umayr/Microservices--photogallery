@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: storagemgmt
-          image: ranamahadahmer/storagemgmt
+          image: us.gcr.io/atomic-409916/storagemgmt
           ports:
             - containerPort: 4001
 ---

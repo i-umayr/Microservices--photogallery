@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: eventbus
-          image: ranamahadahmer/eventbus
+          image: us.gcr.io/atomic-409916/eventbus
           ports:
             - containerPort: 4010
 ---
