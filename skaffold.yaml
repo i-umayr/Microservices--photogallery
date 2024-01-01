@@ -16,7 +16,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "src/*/*.js"
+          - src: "*"
             dest: .
     - image:  us.gcr.io/atomic-409916/eventbus
       context: MicroServices/EventBusServ
@@ -24,7 +24,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "*.js"
+          - src: "*"
             dest: .
     - image:  us.gcr.io/atomic-409916/gallerymgmt
       context: MicroServices/GalleryMgmtServ
@@ -32,7 +32,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "/*/*.js"
+          - src: "*"
             dest: .
     - image:  us.gcr.io/atomic-409916/logging
       context: MicroServices/loggingServ
@@ -40,7 +40,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "/*/*.js"
+          - src: "*"
             dest: .
     - image:  us.gcr.io/atomic-409916/query
       context: MicroServices/QueryServ
@@ -48,7 +48,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "/*/*.js"
+          - src: "*"
             dest: .
     - image:  us.gcr.io/atomic-409916/storagemgmt
       context: MicroServices/StorageMgmtServ
@@ -56,7 +56,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "/*/*.js"
+          - src: "*"
             dest: .
     - image:  us.gcr.io/atomic-409916/usagemntr
       context: MicroServices/UsageMntrServ
@@ -64,7 +64,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "/*/*.js"
+          - src: "*"
             dest: .
     - image:  us.gcr.io/atomic-409916/useraccmgmt
       context: MicroServices/UserAccMgmtServ
@@ -72,5 +72,5 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "/*/*.js"
+          - src: "*"
             dest: .

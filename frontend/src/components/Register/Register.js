@@ -5,6 +5,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 
 function Register(props) {
   const [focusState, setFocusState] = useState({
@@ -12,6 +15,9 @@ function Register(props) {
     email: false,
     password: false,
   });
+  const [showPassword, setShowPassword] = useState(false);
+
+
   const [error, setError] = useState("");
   const signIn = useSignIn();
   const navigate = useNavigate();
@@ -30,6 +36,9 @@ function Register(props) {
 
       console.log("Error: ", err);
     }
+  };
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
   const loginHandler = (event) => {
     event.preventDefault();
@@ -140,7 +149,7 @@ function Register(props) {
                     <h2 className="fw-bold mb-5">Sign up now</h2>
                     <form onSubmit={formik.handleSubmit}>
                       <div className="row">
-                        <div className="col-md-6 mb-4">
+                        <div className="mb-4 col-8">
                           <div className="form-outline">
                             <input
                               name="username"
@@ -170,7 +179,7 @@ function Register(props) {
                         </div>
                       </div>
                       {/* Email input */}
-                      <div className="form-outline mb-4">
+                      <div className="form-outline mb-4 col-8">
                         <input
                           name="email"
                           value={formik.values.email}
@@ -194,30 +203,36 @@ function Register(props) {
                       </div>
 
                       {/* Password input */}
-                      <div className="form-outline mb-4">
+                      <div className="form-outline mb-4 row">
+                        <span className="col-8">
                         <input
                           name="password"
                           value={formik.values.password}
                           onChange={formik.handleChange}
                           onBlur={() => handleInputBlur("password")}
                           onFocus={() => handleInputFocus("password")}
-                          type="password"
+                          type={showPassword ? "text" : "password"}
                           id="form3Example4"
                           className="form-control"
                         />
+
+
                         {(!formik.values.password || focusState.password) && (
                           <label className="form-label" htmlFor="form3Example4">
                             Password
                           </label>
-                        )}
-
+                          )}
+                        </span>
+                        <span className="eye-icon-container form-outline col-2" >
+                        <FontAwesomeIcon
+                          icon={showPassword ? faEye : faEyeSlash}
+                          className="eye-icon"
+                          onClick={togglePasswordVisibility}
+                        />
+                        </span>
                         <div>
                           {formik.touched.username && formik.errors.username}
                         </div>
-
-                        {/* <label className="form-label" htmlFor="form3Example4">
-                        Password
-                      </label> */}
                       </div>
                       <div className="form-check d-flex justify-content-center mb-4">
                         <label
