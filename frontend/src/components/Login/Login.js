@@ -68,11 +68,6 @@ function Login(props) {
 
   return (
     <div
-      style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL + "/images/home.jpg"})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
     >
       <div>
         <meta charSet="UTF-8" />

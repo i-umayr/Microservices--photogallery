@@ -30,26 +30,27 @@ router.post("/register", async (req, res) => {
     });
     newUser
       .save()
-      .then(async (user) => {
+      .then(async (newuser) => {
         const jwtToken = jwt.sign(
-          {id: user._id, email: user.email},
+          {id: newuser._id, email: newuser.email},
           process.env.JWT_SECRET
         );
         try{
+          console.log(newuser)
         await axios.post(`${process.env.EVENT_SERV}/events`, {
            type: "UserCreated",
            data: {
-           userId: user._id,
-           username:user.username,
-           email:user.email,
-           password:user.password
+             userId: newuser._id,
+             username:newuser.username,
+             email:newuser.email,
+             password:newuser.password
            },
           });
         }
         catch(error){
           console.log(error)
         }
-        res.json({ message: "Welcome", token: jwtToken,userId:user._id });
+        res.json({ message: "Welcome", token: jwtToken,userId:newuser._id });
       })
       .catch((err) => console.log(err));
 
@@ -113,3 +114,5 @@ router.post("/login", async (req, res) => {
 });
 
 module.exports = router;
+
+
