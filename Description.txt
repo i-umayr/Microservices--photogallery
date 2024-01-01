@@ -30,7 +30,7 @@ docker push ranamahadahmer/useraccmgmt
 
 
 
-kubectl apply -f .
+kubectl apply -f k8s/
 
 
 
