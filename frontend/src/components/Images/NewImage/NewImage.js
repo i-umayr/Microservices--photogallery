@@ -85,6 +85,7 @@ const NewImage = ({ onImageAdded }) => {
         multiple
         onChange={handleFileChange}
         className={styles.fileInput}
+        accept=".jpg, .jpeg, .png, .gif, .bmp, .tif, .tiff, .webp, .svg, .ico, .jfif, .pjpeg, .pjp"
       />
       <label htmlFor="file" className={styles.fileLabel}>
         <span className={styles.plusIcon}>+</span>
