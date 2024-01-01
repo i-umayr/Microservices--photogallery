@@ -21,19 +21,6 @@ function Register(props) {
     try {
       const apiEndpoint = process.env.REACT_APP_AUTH_BACKEND;
       const response = await axios.post(`${apiEndpoint}/users/register`, values);
-
-      signIn({
-        token: response.data.token,
-        userId: response.data.userId,
-        expiresIn: 3600,
-        tokenType: "Bearer",
-        authState: {
-          email: values.email,
-          userId: response.data.userId,
-          token: response.data.token,
-        },
-      });
-      localStorage.setItem("authToken", response.data.token);
       toast.success("Account created successful!");
       navigate("/login");
     } catch (err) {
@@ -57,9 +44,7 @@ function Register(props) {
     onSubmit,
   });
 
-  const homeHandler = () => {
-    navigate("/")
-  }
+
 
   const handleInputFocus = (field) => {
     setFocusState((prevFocusState) => ({ ...prevFocusState, [field]: true }));
@@ -263,18 +248,6 @@ function Register(props) {
                             onClick={loginHandler}
                           >
                             Click here
-                          </span>
-                        </p>
-                        <p>
-                          <span
-                            style={{
-                              color: "#007bff",
-                              cursor: "pointer",
-                              textDecoration: "underline",
-                            }}
-                            onClick={homeHandler}
-                          >
-                            Home Page
                           </span>
                         </p>
                       </div>

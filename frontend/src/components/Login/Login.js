@@ -231,18 +231,6 @@ function Login(props) {
                             Click here
                           </span>
                         </p>
-                        <p>
-                          <span
-                            style={{
-                              color: "#007bff",
-                              cursor: "pointer",
-                              textDecoration: "underline",
-                            }}
-                            onClick={homeHandler}
-                          >
-                            Home Page
-                          </span>
-                        </p>
                       </div>
                     </form>
                   </div>
