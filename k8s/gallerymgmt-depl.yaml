@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: gallerymgmt
-          image: ranamahadahmer/gallerymgmt
+          image: us.gcr.io/atomic-409916/gallerymgmt
           ports:
             - containerPort: 4002
 ---

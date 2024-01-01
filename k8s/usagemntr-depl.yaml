@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: usagemntr
-          image: ranamahadahmer/usagemntr
+          image: us.gcr.io/atomic-409916/usagemntr
           ports:
             - containerPort: 4004
 ---
