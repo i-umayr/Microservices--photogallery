@@ -26,8 +26,25 @@ const MainNavigation = () => {
   };
 
   const LogoutHandler = () => {
+    // Clear cache
+    if (window.location.protocol === 'http:') {
+      window.location.href = window.location.href.replace('http:', 'http:');
+    } else {
+      window.location.reload(true);
+    }
+
+    // Clear cookies
+    document.cookie.split(";").forEach((c) => {
+      document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+
+    // Display logout success toast
     toast.success('Logout successful!');
+
+    // Perform logout
     signOut();
+
+    // Navigate to the home page
     navigate("/");
   };
 

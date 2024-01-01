@@ -6,8 +6,10 @@ const { Query } = require("../models/QuerySchema");
 
 function verifyToken(req, res, next) {
   const token = req.header("Authorization");
+  console.log(token);
   if (!token)
     return res.status(401).json({ message: "Authorization token missing" });
+
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -18,8 +20,10 @@ function verifyToken(req, res, next) {
   }
 }
 
-router.get("/:userId", verifyToken, async (req, res) => {
-    try {
+//verifyToken,
+router.get("/:userId",  async (req, res) => {
+  console.log(req);
+  try {
         const userId = req.params.userId;
     
         const userData = await Query.findOne({ userId });

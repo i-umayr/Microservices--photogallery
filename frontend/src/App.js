@@ -26,6 +26,7 @@ function App() {
       try {
         const userId = auth().userId;
         const token = auth().token;
+        console.log(token);
         const config = {
             headers: {
               Authorization: `${token}`,
@@ -45,7 +46,7 @@ function App() {
     if (isAuthenticated()) {
       fetchData(); 
     }
-  }, [dispatch]);
+  }, [dispatch,auth,isAuthenticated]);
   const router = createBrowserRouter([
     {
       path: "/",  

@@ -19,9 +19,11 @@ app.post("/events", async (req, res) => {
   const { type, data } = req.body;
   if (type === "UserCreated") {
     try {
+
       const { userId, username, email } = data;
       const query = await Query.findOne({ userId });
       if (!query) {
+        console.log(`user id in query${userId}`)
         const defaultQueryData = {
           userId: userId,
           username: username,
