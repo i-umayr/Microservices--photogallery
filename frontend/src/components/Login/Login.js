@@ -200,9 +200,9 @@ function Login(props) {
                           name="password"
                           value={formik.values.password}
                           onChange={formik.handleChange}
-                          type="password"
                           onBlur={() => handleInputBlur("password")}
                           onFocus={() => handleInputFocus("password")}
+                          type={showPassword ? "text" : "password"}
                           id="form3Example3"
                           className="form-control"
 

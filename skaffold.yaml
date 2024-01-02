@@ -1,76 +1,76 @@
 apiVersion: skaffold/v2alpha3
 kind: Config
-metadata:
+metadata: 
   name: microservices-photogallery
-deploy:
-  kubectl:
-    manifests:
-        - ./k8s/*
-build:
-  googleCloudBuild:
+deploy: 
+  kubectl: 
+    manifests: 
+      - ./k8s/*
+build: 
+  googleCloudBuild: 
     projectId: atomic-409916
-  artifacts:
-    - image:  us.gcr.io/atomic-409916/frontend
+  artifacts: 
+    - image: us.gcr.io/atomic-409916/frontend
       context: frontend
-      docker:
+      docker: 
         dockerfile: Dockerfile
-      sync:
-        manual:
+      sync: 
+        manual: 
           - src: "*"
             dest: .
-    - image:  us.gcr.io/atomic-409916/eventbus
+    - image: us.gcr.io/atomic-409916/eventbus
       context: MicroServices/EventBusServ
-      docker:
+      docker: 
         dockerfile: Dockerfile
-      sync:
-        manual:
+      sync: 
+        manual: 
           - src: "*"
             dest: .
-    - image:  us.gcr.io/atomic-409916/gallerymgmt
+    - image: us.gcr.io/atomic-409916/gallerymgmt
       context: MicroServices/GalleryMgmtServ
-      docker:
+      docker: 
         dockerfile: Dockerfile
-      sync:
-        manual:
+      sync: 
+        manual: 
           - src: "*"
             dest: .
-    - image:  us.gcr.io/atomic-409916/logging
+    - image: us.gcr.io/atomic-409916/logging
       context: MicroServices/loggingServ
-      docker:
+      docker: 
         dockerfile: Dockerfile
-      sync:
-        manual:
+      sync: 
+        manual: 
           - src: "*"
             dest: .
-    - image:  us.gcr.io/atomic-409916/query
+    - image: us.gcr.io/atomic-409916/query
       context: MicroServices/QueryServ
-      docker:
+      docker: 
         dockerfile: Dockerfile
-      sync:
-        manual:
+      sync: 
+        manual: 
           - src: "*"
             dest: .
-    - image:  us.gcr.io/atomic-409916/storagemgmt
+    - image: us.gcr.io/atomic-409916/storagemgmt
       context: MicroServices/StorageMgmtServ
-      docker:
+      docker: 
         dockerfile: Dockerfile
-      sync:
-        manual:
+      sync: 
+        manual: 
           - src: "*"
             dest: .
-    - image:  us.gcr.io/atomic-409916/usagemntr
+    - image: us.gcr.io/atomic-409916/usagemntr
       context: MicroServices/UsageMntrServ
-      docker:
+      docker: 
         dockerfile: Dockerfile
-      sync:
-        manual:
+      sync: 
+        manual: 
           - src: "*"
             dest: .
-    - image:  us.gcr.io/atomic-409916/useraccmgmt
+    - image: us.gcr.io/atomic-409916/useraccmgmt
       context: MicroServices/UserAccMgmtServ
-      docker:
+      docker: 
         dockerfile: Dockerfile
-      sync:
-        manual:
+      sync: 
+        manual: 
           - src: "*"
             dest: .
