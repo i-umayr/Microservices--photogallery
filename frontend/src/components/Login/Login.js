@@ -5,12 +5,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function Login(props) {
   const [focusState, setFocusState] = useState({
     email: false,
     password: false,
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+
   const [error, setError] = useState("");
   const signIn = useSignIn();
   const navigate = useNavigate();
@@ -46,6 +52,11 @@ function Login(props) {
     event.preventDefault();
     navigate("/register");
   };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -168,6 +179,9 @@ function Login(props) {
                               onFocus={() => handleInputFocus("email")}
                               id="form3Example1"
                               className="form-control"
+                              style={{
+                                width: '20rem'
+                              }}
                             />
                             {(!formik.values.email || focusState.email) && (
                               <label
@@ -191,6 +205,11 @@ function Login(props) {
                           onFocus={() => handleInputFocus("password")}
                           id="form3Example3"
                           className="form-control"
+
+                          style={{
+                            width: '20rem'
+                          }}
+
                         />
 
                         {(!formik.values.password || focusState.password) && (
@@ -198,6 +217,20 @@ function Login(props) {
                             Password
                           </label>
                         )}
+
+                        <span className="eye-icon-container form-outline col-2"
+                          style={{
+                            position: 'relative',
+                            top: '-2rem',
+                            left: '4rem'
+                          }}>
+                          <FontAwesomeIcon
+                            icon={showPassword ? faEye : faEyeSlash}
+                            className="eye-icon"
+                            onClick={togglePasswordVisibility}
+                          />
+                        </span>
+
                       </div>
 
                       <div className="form-check d-flex justify-content-center mb-4">

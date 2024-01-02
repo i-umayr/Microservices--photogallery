@@ -160,17 +160,20 @@ function Register(props) {
                               type="username"
                               id="form3Example1"
                               className="form-control"
+                              style={{
+                                width: '20rem'
+                              }}
                             />
 
                             {(!formik.values.username ||
                               focusState.username) && (
-                              <label
-                                className="form-label"
-                                htmlFor="form3Example1"
-                              >
-                                User name
-                              </label>
-                            )}
+                                <label
+                                  className="form-label"
+                                  htmlFor="form3Example1"
+                                >
+                                  User name
+                                </label>
+                              )}
 
                             {/* <label className="form-label" htmlFor="form3Example1">
                             User name
@@ -189,6 +192,9 @@ function Register(props) {
                           type="email"
                           id="form3Example3"
                           className="form-control"
+                          style={{
+                            width: '20rem'
+                          }}
                         />
 
                         {(!formik.values.email || focusState.email) && (
@@ -205,31 +211,46 @@ function Register(props) {
                       {/* Password input */}
                       <div className="form-outline mb-4 row">
                         <span className="col-8">
-                        <input
-                          name="password"
-                          value={formik.values.password}
-                          onChange={formik.handleChange}
-                          onBlur={() => handleInputBlur("password")}
-                          onFocus={() => handleInputFocus("password")}
-                          type={showPassword ? "text" : "password"}
-                          id="form3Example4"
-                          className="form-control"
-                        />
-
-
-                        {(!formik.values.password || focusState.password) && (
-                          <label className="form-label" htmlFor="form3Example4">
-                            Password
-                          </label>
+                          <input
+                            name="password"
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            onBlur={() => handleInputBlur("password")}
+                            onFocus={() => handleInputFocus("password")}
+                            type={showPassword ? "text" : "password"}
+                            id="form3Example4"
+                            className="form-control"
+                            style={{
+                              width: '20rem'
+                            }}
+                          />
+                          {(!formik.values.password || focusState.password) && (
+                            <label className="form-label mx-3 d-flex justify-content-between" htmlFor="form3Example4">
+                              Password
+                            </label>
                           )}
+
+                          <span className="eye-icon-container form-outline col-2"
+                            style={{
+                              position: 'relative',
+                              top: '-2rem',
+                              left: '10rem'
+                            }}>
+                            <FontAwesomeIcon
+                              icon={showPassword ? faEye : faEyeSlash}
+                              className="eye-icon"
+                              onClick={togglePasswordVisibility}
+                            />
+                          </span>
+
                         </span>
-                        <span className="eye-icon-container form-outline col-2" >
+                        {/* <span className="eye-icon-container form-outline col-2" >
                         <FontAwesomeIcon
                           icon={showPassword ? faEye : faEyeSlash}
                           className="eye-icon"
                           onClick={togglePasswordVisibility}
                         />
-                        </span>
+                        </span> */}
                         <div>
                           {formik.touched.username && formik.errors.username}
                         </div>
