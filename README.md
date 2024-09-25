@@ -66,6 +66,7 @@ The goal of the project is to create a scalable and efficient photo gallery appl
 - Yasir Ghaffar
 - AbuBakr Javed
 - Rana Mahad
+- Umair Asim
 
 ## Acknowledgements
 
